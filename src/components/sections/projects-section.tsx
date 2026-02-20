@@ -17,7 +17,7 @@ const projectsData = [
   {
     title: 'AIQuizCraft.com',
     description: 'An AI-powered platform to create and share engaging quizzes in seconds.',
-    image: '/aiquizcraft.png',
+    image: '/image/aiquizcraft.png',
     tags: ['Rext.js', 'API', 'SaaS'],
     liveLink: 'https://aiquizcraft.com',
     githubLink: '#',
@@ -26,7 +26,7 @@ const projectsData = [
   {
     title: 'Sparrowfy',
     description: 'A SaaS platform for coaching management, currently in the testing phase.',
-    image: '/Untitled design.png',
+    image: '/image/Untitled design.png',
     tags: ['React.js', 'API', 'SaaS'],
     liveLink: '#',
     githubLink: '#',
@@ -35,7 +35,7 @@ const projectsData = [
   {
     title: 'Online Gaming Platform',
     description: 'A modern online gaming platform.',
-    image: '/online-game.jpeg',
+    image: '/image/online-game.jpeg',
     tags: ['Vite', 'React'],
     liveLink: 'http://realonlinegaming.netlify.app',
     githubLink: '#',
@@ -44,7 +44,7 @@ const projectsData = [
   {
     title: 'Resume Builder',
     description: 'A web application for creating resumes easily.',
-    image: '/resume.png',
+    image: '/image/resume.png',
     tags: ['React', 'Web App', 'Utility'],
     liveLink: 'https://resume-builder-ten-black.vercel.app/',
     githubLink: '#',
@@ -53,7 +53,7 @@ const projectsData = [
   {
     title: 'Beautiful Home Decor - AffiliateStore',
     description: 'Beautiful Home Decor - AffiliateStore.',
-    image: '/images/affilte.jpeg',
+    image: '/image/affilte.jpeg',
     tags: ['E-commerce', 'Affiliate', 'Decor'],
     liveLink: 'https://beauty-hub-jet.vercel.app/',
     githubLink: '#',
@@ -62,7 +62,7 @@ const projectsData = [
   {
     title: 'Web Automation Using Selenium',
     description: 'Python Bing Search Bot that automates web searches using Selenium.',
-    image: '/automatipn.jpg',
+    image: '/image/automatipn.jpg',
     tags: ['Python', 'Selenium', 'Automation'],
     liveLink: '#',
     githubLink: '#',

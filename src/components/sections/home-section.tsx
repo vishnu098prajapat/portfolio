@@ -70,7 +70,7 @@ export default function HomeSection() {
                 {/* Image */}
                 <div className="relative w-full h-full">
                     <Image
-                        src="/images/m3.JPG"
+                        src="/image/m3.JPG"
                         alt="Vishnu Prajapat"
                         width={400}
                         height={400}

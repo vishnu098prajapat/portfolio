@@ -17,7 +17,7 @@ const projectsData = [
   {
     title: 'AIQuizCraft.com',
     description: 'An AI-powered platform to create and share engaging quizzes in seconds.',
-    image: '/image/aiquizcraft.png',
+    image: 'https://images.unsplash.com/photo-1677756223525-07dee52570bc?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     tags: ['Next.js', 'API', 'SaaS'],
     liveLink: 'https://aiquizcraft.com',
     githubLink: '#',
@@ -26,7 +26,7 @@ const projectsData = [
   {
     title: 'Sparrowfy',
     description: 'A SaaS platform for coaching management, currently in the testing phase.',
-    image: '/image/Untitled design.png',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     tags: ['React.js', 'API', 'SaaS'],
     liveLink: '#',
     githubLink: '#',
@@ -35,7 +35,7 @@ const projectsData = [
   {
     title: 'Online Gaming Platform',
     description: 'A modern online gaming platform.',
-    image: '/image/online-game.jpeg',
+    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     tags: ['Vite', 'React'],
     liveLink: 'http://realonlinegaming.netlify.app',
     githubLink: '#',
@@ -44,7 +44,7 @@ const projectsData = [
   {
     title: 'Resume Builder',
     description: 'A web application for creating resumes easily.',
-    image: '/image/resume.png',
+    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     tags: ['React', 'Web App', 'Utility'],
     liveLink: 'https://resume-builder-ten-black.vercel.app/',
     githubLink: '#',
@@ -62,7 +62,7 @@ const projectsData = [
   {
     title: 'Web Automation Using Selenium',
     description: 'Python Bing Search Bot that automates web searches using Selenium.',
-    image: '/image/automatipn.jpg',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     tags: ['Python', 'Selenium', 'Automation'],
     liveLink: '#',
     githubLink: '#',

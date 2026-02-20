@@ -183,7 +183,23 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
                             <FormField control={form.control} name={`projects.${index}.name`} render={({ field }) => <FormItem><FormLabel>Project Name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                             <FormField control={form.control} name={`projects.${index}.projectUrl`} render={({ field }) => <FormItem><FormLabel>Project URL</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                             <FormField control={form.control} name={`projects.${index}.description`} render={({ field }) => <FormItem><FormLabel>Description</FormLabel><FormControl><Textarea {...field} /></FormControl><FormMessage /></FormItem>} />
-                            <FormField control={form.control} name={`projects.${index}.technologies`} render={({ field }) => <FormItem><FormLabel>Technologies (comma-separated)</FormLabel><FormControl><Input {...field} onChange={(e) => field.onChange(e.target.value.split(',').map(s => s.trim()))} /></FormControl><FormMessage /></FormItem>} />
+                            <FormField 
+                              control={form.control} 
+                              name={`projects.${index}.technologies`} 
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Technologies (comma-separated)</FormLabel>
+                                  <FormControl>
+                                    <Input 
+                                      {...field} 
+                                      value={Array.isArray(field.value) ? field.value.join(', ') : ''}
+                                      onChange={(e) => field.onChange(e.target.value.split(',').map(s => s.trim()).filter(Boolean))} 
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )} 
+                            />
                             <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2" onClick={() => removeProject(index)}><Trash2 className="w-4 h-4" /></Button>
                         </div>
                     ))}

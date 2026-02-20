@@ -1,13 +1,11 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
-import { cn } from '@/lib/utils';
-import { Navbar } from '@/components/layout/navbar';
-import Footer from '@/components/layout/footer';
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster"; // Import Toaster
 
 export const metadata: Metadata = {
-  title: 'AceFolio - Your Professional Portfolio',
-  description: 'Create and showcase your professional portfolio with AI-powered features.',
+  title: 'Vishnu Prajapat | Portfolio',
+  description: 'Modern Portfolio of Vishnu Prajapat, showcasing skills in Web Development with AI, projects, and achievements.',
 };
 
 export default function RootLayout({
@@ -16,22 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Belleza&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
       </head>
-      <body
-        className={cn(
-          'min-h-screen bg-background font-body antialiased'
-        )}
-      >
-        <div className="relative flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+      <body className="font-body antialiased">
+        {children}
         <Toaster />
       </body>
     </html>

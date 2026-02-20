@@ -1,80 +1,78 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 96.1%; /* #F5F5F5 */
-    --foreground: 240 10% 3.9%;
+    /* New Theme based on reference image - Light */
+    --background: 240 60% 97%; /* Very Light Blue/Lavender */
+    --foreground: 240 10% 25%; /* Dark Slate Blue */
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --muted: 240 20% 90%; 
+    --muted-foreground: 240 10% 45%; 
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover: 240 60% 98%; 
+    --popover-foreground: 240 10% 25%;
 
-    --primary: 231 48% 48%; /* #3F51B5 */
-    --primary-foreground: 0 0% 98%;
+    --card: 240 60% 98%; 
+    --card-foreground: 240 10% 25%;
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --border: 240 20% 88%; 
+    --input: 240 20% 92%; 
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --primary: 275 80% 60%; /* Bright Purple/Magenta */
+    --primary-foreground: 275 100% 98%; 
 
-    --accent: 174 100% 29%; /* #009688 */
-    --accent-foreground: 0 0% 98%;
+    --secondary: 220 70% 65%; /* Soft Blue */
+    --secondary-foreground: 220 20% 98%; 
 
-    --destructive: 0 84.2% 60.2%;
+    --accent: 275 85% 65%; /* Slightly brighter purple for hover/accent */
+    --accent-foreground: 275 100% 98%; 
+
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 231 48% 48%;
+    --ring: 275 80% 65%; 
+    --radius: 0.8rem;
 
-    --radius: 0.5rem;
-
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-1: 275 80% 60%; 
+    --chart-2: 220 70% 65%;  
+    --chart-3: 290 70% 65%; 
+    --chart-4: 260 70% 68%; 
+    --chart-5: 240 70% 70%;  
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* New Theme based on reference image - Dark */
+    --background: 240 10% 10%; /* Very Dark Blue */
+    --foreground: 240 15% 88%; /* Light Gray-Blue */
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --muted: 240 10% 15%; 
+    --muted-foreground: 240 10% 65%; 
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 240 10% 8%; 
+    --popover-foreground: 240 15% 88%;
 
-    --primary: 231 48% 48%;
-    --primary-foreground: 0 0% 98%;
+    --card: 240 10% 12%; 
+    --card-foreground: 240 15% 88%;
 
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
+    --border: 240 10% 25%; 
+    --input: 240 10% 20%;  
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --primary: 275 80% 65%; /* Bright Purple/Magenta */
+    --primary-foreground: 275 100% 10%; 
 
-    --accent: 174 80% 40%;
-    --accent-foreground: 0 0% 98%;
+    --secondary: 220 60% 60%; /* Soft Blue */
+    --secondary-foreground: 220 20% 90%; 
 
-    --destructive: 0 62.8% 30.6%;
+    --accent: 275 85% 70%; 
+    --accent-foreground: 275 100% 10%; 
+
+    --destructive: 0 63% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 231 48% 48%;
-    
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --ring: 275 80% 70%;
   }
 }
 
@@ -83,8 +81,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply bg-background text-foreground;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }

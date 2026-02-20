@@ -1,11 +1,13 @@
-import React from 'react';
-import { profileData } from '@/lib/profile-data';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="py-6 mt-auto border-t bg-background">
-      <div className="container mx-auto text-center text-sm text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} {profileData.personalInfo.name}. All Rights Reserved.</p>
+    <footer className="bg-muted py-6 text-muted-foreground">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p className="text-sm">
+          &copy; {currentYear} All rights reserved.
+        </p>
       </div>
     </footer>
   );

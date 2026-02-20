@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { SiteHeader } from '@/components/site-header';
+import { Navbar } from '@/components/layout/navbar';
+import Footer from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
@@ -27,8 +28,9 @@ export default function RootLayout({
         )}
       >
         <div className="relative flex min-h-screen flex-col">
-          <SiteHeader />
+          <Navbar />
           <main className="flex-1">{children}</main>
+          <Footer />
         </div>
         <Toaster />
       </body>

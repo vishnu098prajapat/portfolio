@@ -18,7 +18,7 @@ const projectsData = [
     title: 'AIQuizCraft.com',
     description: 'An AI-powered platform to create and share engaging quizzes in seconds.',
     image: '/image/aiquizcraft.png',
-    tags: ['Rext.js', 'API', 'SaaS'],
+    tags: ['Next.js', 'API', 'SaaS'],
     liveLink: 'https://aiquizcraft.com',
     githubLink: '#',
     aiHint: 'AI quiz platform'
@@ -53,7 +53,7 @@ const projectsData = [
   {
     title: 'Beautiful Home Decor - AffiliateStore',
     description: 'Beautiful Home Decor - AffiliateStore.',
-    image: '/image/affilte.jpeg',
+    image: 'https://images.unsplash.com/photo-1657812159075-7f0abd98f7b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxlY29tbWVyY2UlMjB3ZWJzaXRlfGVufDB8fHx8MTc3MTUwOTM0M3ww&ixlib=rb-4.1.0&q=80&w=1080',
     tags: ['E-commerce', 'Affiliate', 'Decor'],
     liveLink: 'https://beauty-hub-jet.vercel.app/',
     githubLink: '#',

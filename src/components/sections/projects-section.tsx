@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -10,65 +9,9 @@ import { Badge } from '@/components/ui/badge';
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { profileData } from '@/lib/profile-data';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projectsData = [
-  {
-    title: 'AIQuizCraft.com',
-    description: 'An AI-powered platform to create and share engaging quizzes in seconds.',
-    image: 'https://images.unsplash.com/photo-1677756223525-07dee52570bc?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['Next.js', 'API', 'SaaS'],
-    liveLink: 'https://aiquizcraft.com',
-    githubLink: '#',
-    aiHint: 'AI quiz platform'
-  },
-  {
-    title: 'Sparrowfy',
-    description: 'A SaaS platform for coaching management, currently in the testing phase.',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['React.js', 'API', 'SaaS'],
-    liveLink: '#',
-    githubLink: '#',
-    aiHint: 'coaching management dashboard'
-  },
-  {
-    title: 'Online Gaming Platform',
-    description: 'A modern online gaming platform.',
-    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['Vite', 'React'],
-    liveLink: 'http://realonlinegaming.netlify.app',
-    githubLink: '#',
-    aiHint: 'online game platform interface'
-  },
-  {
-    title: 'Resume Builder',
-    description: 'A web application for creating resumes easily.',
-    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['React', 'Web App', 'Utility'],
-    liveLink: 'https://resume-builder-ten-black.vercel.app/',
-    githubLink: '#',
-    aiHint: 'resume builder application'
-  },
-  {
-    title: 'Beautiful Home Decor - AffiliateStore',
-    description: 'Beautiful Home Decor - AffiliateStore.',
-    image: 'https://images.unsplash.com/photo-1657812159075-7f0abd98f7b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxlY29tbWVyY2UlMjB3ZWJzaXRlfGVufDB8fHx8MTc3MTUwOTM0M3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    tags: ['E-commerce', 'Affiliate', 'Decor'],
-    liveLink: 'https://beauty-hub-jet.vercel.app/',
-    githubLink: '#',
-    aiHint: 'home decor website'
-  },
-  {
-    title: 'Web Automation Using Selenium',
-    description: 'Python Bing Search Bot that automates web searches using Selenium.',
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['Python', 'Selenium', 'Automation'],
-    liveLink: '#',
-    githubLink: '#',
-    aiHint: 'automation script code'
-  },
-];
 
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -79,95 +22,97 @@ export default function ProjectsSection() {
     if (!sectionRef.current || !titleRef.current || !projectsGridRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Animate the title
       gsap.from(titleRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current!,
-          start: "top 80%", 
+          start: "top 80%",
           toggleActions: "play none none none"
         },
-        opacity: 0, y: 50, duration: 0.8, ease: 'power3.out',
+        opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
       });
 
-      // Animate each project card
       const cards = gsap.utils.toArray<HTMLDivElement>(projectsGridRef.current!.children);
       cards.forEach((card) => {
         gsap.from(card, {
           scrollTrigger: {
             trigger: card,
-            start: "top 85%", 
-            toggleActions: "play none none reset", 
+            start: "top 85%",
+            toggleActions: "play none none none",
           },
           opacity: 0,
-          y: 60, 
-          scale: 0.95, 
-          duration: 0.6, 
+          y: 40,
+          scale: 0.98,
+          duration: 0.6,
           ease: 'power2.out',
         });
       });
-
-    }, sectionRef); 
+    }, sectionRef);
 
     return () => {
-      ctx.revert(); 
+      ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 sm:py-24 md:py-28">
+    <section id="projects" ref={sectionRef} className="py-16 sm:py-20 md:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 ref={titleRef} className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 font-headline">
+        <h2 ref={titleRef} className="text-3xl sm:text-4xl font-bold text-center mb-10 sm:mb-12 font-headline">
             <span className="regular-text">My </span>
             <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Projects</span>
         </h2>
         
         <div 
           ref={projectsGridRef} 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
         >
-          {projectsData.map((project, index) => (
-            <div key={index} className="project-card"> {/* Wrapper for consistent animation targeting */}
-              <Card className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 rounded-lg transform-gpu hover:scale-[1.02] bg-card/70 backdrop-blur-lg border border-[hsla(var(--border)/0.25)] group">
-                <div className="relative w-full overflow-hidden aspect-[3/2]">
+          {profileData.projects.map((project, index) => (
+            <div key={index} className="project-card">
+              <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-xl bg-card/40 backdrop-blur-sm border border-border/50 group">
+                <div className="relative w-full overflow-hidden aspect-[16/10]">
                   <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className="rounded-t-lg object-cover transition-transform duration-500 group-hover:scale-110"
-                    data-ai-hint={project.aiHint}
+                    src={project.imageUrl}
+                    alt={project.name}
+                    width={500}
+                    height={312}
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    data-ai-hint={project.imageHint}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p className="text-white text-xs font-medium">Click to view project</p>
+                  </div>
                 </div>
-                <CardHeader className="pb-2 pt-4">
-                  <CardTitle className="text-lg md:text-xl font-semibold text-primary font-headline">{project.title}</CardTitle>
-                  <CardDescription className="text-card-foreground h-24 text-sm">{project.description}</CardDescription>
+                <CardHeader className="p-4 pb-0">
+                  <CardTitle className="text-base font-bold text-foreground font-headline group-hover:text-primary transition-colors">{project.name}</CardTitle>
                 </CardHeader>
-                <CardContent className="flex-grow pt-2">
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-secondary/80 text-secondary-foreground text-xs px-2 py-0.5">{tag}</Badge>
+                <CardContent className="p-4 pt-2 flex-grow">
+                  <CardDescription className="text-muted-foreground text-xs leading-relaxed mb-3 line-clamp-3">
+                    {project.description}
+                  </CardDescription>
+                  <div className="flex flex-wrap gap-1">
+                    {project.technologies.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="bg-secondary/50 text-[10px] px-2 py-0 h-4">
+                        {tag}
+                      </Badge>
                     ))}
                   </div>
                 </CardContent>
-                <CardFooter className="border-t border-[hsla(var(--border)/0.3)] pt-3 pb-4">
-                  <div className="flex justify-between w-full items-center">
-                    {project.liveLink && project.liveLink !== '#' ? (
-                      <Button variant="outline" size="sm" asChild className="text-accent border-accent hover:bg-accent/10 hover:text-accent-foreground transition-colors text-xs px-3 py-1.5 h-auto">
-                        <Link href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                          Live Demo <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                <CardFooter className="p-4 pt-0 border-t border-border/30 mt-auto">
+                  <div className="flex justify-between w-full items-center pt-3">
+                    {project.projectUrl && project.projectUrl !== '#' ? (
+                      <Button variant="link" size="sm" asChild className="p-0 h-auto text-xs text-primary hover:text-accent transition-colors">
+                        <Link href={project.projectUrl} target="_blank" rel="noopener noreferrer">
+                          Live Demo <ExternalLink className="ml-1 h-3 w-3" />
                         </Link>
                       </Button>
                     ) : (
-                      <Button variant="outline" size="sm" disabled className="text-accent border-accent transition-colors text-xs px-3 py-1.5 h-auto">
-                        Live Demo <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                      </Button>
+                      <span className="text-[10px] text-muted-foreground italic">Work in progress</span>
                     )}
 
-                    {project.githubLink && project.githubLink !== '#' && (
-                      <Button variant="ghost" size="sm" asChild className="text-card-foreground hover:text-primary transition-colors text-xs px-3 py-1.5 h-auto">
-                          <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                          <Github className="mr-1.5 h-3.5 w-3.5" /> Source
+                    {project.githubUrl && project.githubUrl !== '#' && (
+                      <Button variant="ghost" size="icon" asChild className="h-7 w-7 rounded-full text-muted-foreground hover:text-primary">
+                          <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                            <Github className="h-4 w-4" />
                           </Link>
                       </Button>
                     )}

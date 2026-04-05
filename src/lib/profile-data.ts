@@ -21,6 +21,7 @@ export const profileData: ProfileData = {
     { name: "DSA", endorsement: 15 },
     { name: "Firebase", endorsement: 14 },
     { name: "Automation", endorsement: 12 },
+    { name: "AI & GenAI", endorsement: 15 },
     { name: "Data Science Libs", endorsement: 10 },
   ],
   projects: [
@@ -62,7 +63,7 @@ export const profileData: ProfileData = {
     },
     {
       name: "Resume Builder",
-      description: "A professional web application for creating resumes easily with customizable templates and real-time AI assistance.",
+      description: "A professional web application for creating resumes easily with customizable templates and real-time assistance.",
       technologies: ["React", "Web App", "AI"],
       imageUrl: "/src/public/image/resume.png",
       imageHint: 'resume builder',

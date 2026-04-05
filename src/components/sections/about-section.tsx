@@ -9,12 +9,13 @@ import { User } from 'lucide-react';
 import Image from 'next/image';
 import { profileData } from '@/lib/profile-data';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Register GSAP plugin inside useEffect to avoid SSR errors
+    gsap.registerPlugin(ScrollTrigger);
+    
     const ctx = gsap.context(() => {
       if (!sectionRef.current) return;
       
@@ -48,11 +49,10 @@ export default function AboutSection() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            {/* Image Column */}
             <div className="relative flex justify-center gsap-about-item">
-              <div className="relative w-full max-w-[380px] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-white/20 group bg-background transition-transform duration-500 hover:scale-[1.01]">
+              <div className="relative w-full max-w-[380px] aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20 group bg-background transition-transform duration-500 hover:scale-[1.01]">
                 <Image
-                  src={profileData.personalInfo.aboutAvatar || profileData.personalInfo.avatar}
+                  src="/images/about.png"
                   alt="About Vishnu"
                   fill
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -60,14 +60,13 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Content Column */}
             <div className="space-y-6 gsap-about-item">
               <div className="p-1.5 bg-primary/5 rounded-full w-fit mb-2">
                  <div className="px-4 py-1.5 bg-background rounded-full text-xs font-bold text-primary flex items-center gap-2">
                     <User className="h-4 w-4" /> Vishnu Prajapat
                  </div>
               </div>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed whitespace-pre-wrap">
                 {profileData.bio}
               </p>
               

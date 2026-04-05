@@ -8,8 +8,6 @@ import { BrainCircuit, Braces, Component, Flame, Github, Code, BarChart3, Sparkl
 import { cn } from '@/lib/utils';
 import { profileData } from '@/lib/profile-data';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const skillMeta: Record<string, { icon: React.ElementType; color: string }> = {
   'React.js': { icon: Component, color: 'text-sky-400' },
   'C++': { icon: Braces, color: 'text-blue-600' },
@@ -28,6 +26,8 @@ export default function SkillsSection() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
     if (!sectionRef.current || !titleRef.current || !gridRef.current) return;
 
     const skillCards = gsap.utils.toArray<HTMLElement>('.skill-card-item');

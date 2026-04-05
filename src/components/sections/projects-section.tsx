@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -11,14 +12,14 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { profileData } from '@/lib/profile-data';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const projectsGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
     if (!sectionRef.current || !titleRef.current || !projectsGridRef.current) return;
 
     const ctx = gsap.context(() => {

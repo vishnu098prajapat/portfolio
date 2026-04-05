@@ -29,7 +29,7 @@ export default function AboutSection() {
           toggleActions: 'play none none none',
         },
         opacity: 0,
-        y: 50,
+        y: 30,
         duration: 0.6,
         stagger: 0.2,
         ease: 'power3.out'
@@ -43,19 +43,19 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-16 sm:py-20 bg-muted/50">
+    <section id="about" ref={sectionRef} className="py-12 sm:py-16 bg-muted/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
           {stats.map((stat, index) => (
-            <div key={index} className="stat-card">
-              <Card className="bg-background shadow-lg h-full">
-                <CardContent className="flex items-center gap-4 sm:gap-6 p-6">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary flex-shrink-0" />
+            <div key={index} className="stat-card w-full sm:w-[calc(50%-12px)] max-w-xs">
+              <Card className="bg-background shadow-md h-full hover:shadow-lg transition-shadow border-none rounded-xl">
+                <CardContent className="flex items-center gap-4 p-5">
+                  <div className="p-3 bg-primary/10 rounded-xl">
+                    <stat.icon className="h-6 w-6 text-primary flex-shrink-0" />
                   </div>
                   <div>
-                    <p className="text-2xl sm:text-3xl font-bold text-foreground">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-foreground leading-none mb-1">{stat.value}</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider font-semibold">{stat.label}</p>
                   </div>
                 </CardContent>
               </Card>

@@ -32,49 +32,49 @@ export default function HomeSection() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative flex items-center justify-center overflow-hidden py-12 md:py-24 pt-20 md:pt-32"
+      className="relative flex items-center justify-center overflow-hidden py-12 md:py-20 mt-8 md:mt-12"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
           
           <div className="text-center md:text-left order-2 md:order-1">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-4 font-headline leading-tight gsap-hero-text">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-3 font-headline leading-tight gsap-hero-text">
               {profileData.personalInfo.name.split(' ')[0]} <br />
-              {profileData.personalInfo.name.split(' ')[1]}
+              <span className="text-primary">{profileData.personalInfo.name.split(' ')[1]}</span>
             </h1>
-            <p className="text-lg sm:text-xl text-foreground/90 mb-4 gsap-hero-text">
+            <p className="text-base sm:text-lg text-foreground/90 mb-3 gsap-hero-text">
               I am an <span className="text-primary font-bold">{profileData.personalInfo.title}</span>
             </p>
-            <p className="text-muted-foreground mb-8 max-w-md mx-auto md:mx-0 gsap-hero-text text-base leading-relaxed">
+            <p className="text-muted-foreground mb-6 max-w-md mx-auto md:mx-0 gsap-hero-text text-sm leading-relaxed">
               {profileData.summary}
             </p>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start gsap-hero-text">
-              <Button size="lg" asChild className="bg-[#333] text-white hover:bg-[#444] rounded-full px-6 h-11 text-sm font-semibold shadow-lg">
+            <div className="flex flex-wrap gap-3 justify-center md:justify-start gsap-hero-text">
+              <Button size="sm" asChild className="bg-[#18181b] text-white hover:bg-[#27272a] rounded-full px-5 h-10 text-xs font-semibold shadow-lg">
                 <Link href="#contact">
-                  Hire Me <MessageCircle className="ml-2 h-4 w-4" />
+                  Hire Me <MessageCircle className="ml-2 h-3 w-3" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="bg-[#f0f0f5] border-transparent hover:bg-muted/80 text-foreground rounded-full px-6 h-11 text-sm font-semibold shadow-md">
+              <Button size="sm" variant="outline" asChild className="bg-[#f4f4f5] border-transparent hover:bg-muted/80 text-foreground rounded-full px-5 h-10 text-xs font-semibold shadow-md">
                 <Link href="#projects">
-                  Explore Work <ArrowRight className="ml-2 h-4 w-4" />
+                  Explore Work <ArrowRight className="ml-2 h-3 w-3" />
                 </Link>
               </Button>
             </div>
           </div>
 
           <div className="relative flex items-center justify-center order-1 md:order-2">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-[400px] lg:h-[400px] gsap-hero-image-wrapper">
-                {/* Subtle outer glow */}
-                <div className="absolute inset-0 rounded-full bg-white opacity-20 blur-[40px] scale-105" />
+            <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 gsap-hero-image-wrapper">
+                {/* Smokey effect */}
+                <div className="absolute inset-0 rounded-full bg-primary/20 blur-[30px] scale-105" />
                 
-                {/* Image Container with Thinner White Border */}
-                <div className="relative w-full h-full p-1.5 rounded-full border-[6px] border-white shadow-xl bg-white overflow-hidden">
+                {/* Thin White Border */}
+                <div className="relative w-full h-full p-1 rounded-full border-[3px] border-white shadow-xl bg-white overflow-hidden">
                     <div className="w-full h-full rounded-full overflow-hidden bg-muted">
                         <Image
                             src={profileData.personalInfo.avatar}
                             alt={profileData.personalInfo.name}
-                            width={500}
-                            height={500}
+                            width={400}
+                            height={400}
                             className="object-cover w-full h-full object-top"
                             priority
                         />

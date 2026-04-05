@@ -27,7 +27,7 @@ export const profileData: ProfileData = {
   projects: [
     {
       name: "Sparrowfy",
-      description: "A comprehensive SaaS platform for coaching management, optimizing student tracking and scheduling with a modern dashboard.",
+      description: "A comprehensive SaaS platform for coaching management, optimizing student tracking and scheduling.",
       technologies: ["React.js", "API", "SaaS"],
       imageUrl: "/images/Untitled design.png",
       imageHint: 'coaching management',
@@ -36,7 +36,7 @@ export const profileData: ProfileData = {
     },
     {
       name: "InstaAutomation",
-      description: "Intelligent tool for automating Instagram comment replies and DM workflows using React and modern automation scripts.",
+      description: "Intelligent tool for automating Instagram comment replies and DM workflows using React and modern scripts.",
       technologies: ["React", "Automation"],
       imageUrl: "/images/automation.png",
       imageHint: 'instagram automation',
@@ -45,7 +45,7 @@ export const profileData: ProfileData = {
     },
     {
       name: "ChatWithPDF",
-      description: "AI-powered tool to interact with your PDF documents, extracting information and answering questions using natural language.",
+      description: "AI-powered tool to interact with your PDF documents, extracting information using natural language.",
       technologies: ["React", "AI", "PDF"],
       imageUrl: "/images/image.png",
       imageHint: 'ai chat pdf',
@@ -54,7 +54,7 @@ export const profileData: ProfileData = {
     },
     {
       name: "Image & PDF Tool",
-      description: "A versatile toolkit for processing images and PDFs, including conversion, compression, and editing features.",
+      description: "A versatile toolkit for processing images and PDFs, including conversion and editing features.",
       technologies: ["React", "Utility", "Tools"],
       imageUrl: "/images/image copy.png",
       imageHint: 'pdf utility tool',
@@ -63,7 +63,7 @@ export const profileData: ProfileData = {
     },
     {
       name: "Resume Builder",
-      description: "A professional web application for creating resumes easily with customizable templates and real-time AI assistance.",
+      description: "A professional web application for creating resumes easily with customizable templates and AI assistance.",
       technologies: ["React", "Web App", "AI"],
       imageUrl: "/images/res.png",
       imageHint: 'resume builder',
@@ -72,7 +72,7 @@ export const profileData: ProfileData = {
     },
     {
       name: "Online Gaming Platform",
-      description: "A modern online gaming platform featuring a responsive interface and real-time game state management.",
+      description: "A modern online gaming platform featuring a responsive interface and real-time state management.",
       technologies: ["Vite", "React"],
       imageUrl: "/images/online-game.jpeg",
       imageHint: 'online gaming',

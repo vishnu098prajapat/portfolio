@@ -40,8 +40,7 @@ export default function ProjectsSection() {
             toggleActions: "play none none none",
           },
           opacity: 0,
-          y: 40,
-          scale: 0.98,
+          y: 30,
           duration: 0.6,
           ease: 'power2.out',
         });
@@ -55,7 +54,7 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-16 sm:py-20 md:py-24 bg-background">
+    <section id="projects" ref={sectionRef} className="py-16 sm:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 ref={titleRef} className="text-3xl sm:text-4xl font-bold text-center mb-10 sm:mb-12 font-headline">
             <span className="regular-text">My </span>
@@ -64,55 +63,52 @@ export default function ProjectsSection() {
         
         <div 
           ref={projectsGridRef} 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto"
         >
           {profileData.projects.map((project, index) => (
             <div key={index} className="project-card">
-              <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-xl bg-card/40 backdrop-blur-sm border border-border/50 group max-w-sm mx-auto">
+              <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 rounded-lg bg-card/50 backdrop-blur-sm border border-border/40 group max-w-[320px] mx-auto">
                 <div className="relative w-full overflow-hidden aspect-[16/10]">
                   <Image
                     src={project.imageUrl}
                     alt={project.name}
-                    width={500}
-                    height={312}
+                    width={400}
+                    height={250}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     data-ai-hint={project.imageHint}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <p className="text-white text-xs font-medium">Click to view project</p>
-                  </div>
                 </div>
-                <CardHeader className="p-4 pb-0">
-                  <CardTitle className="text-base font-bold text-foreground font-headline group-hover:text-primary transition-colors">{project.name}</CardTitle>
+                <CardHeader className="p-4 pb-1">
+                  <CardTitle className="text-sm font-bold text-foreground font-headline group-hover:text-primary transition-colors">{project.name}</CardTitle>
                 </CardHeader>
-                <CardContent className="p-4 pt-2 flex-grow">
-                  <CardDescription className="text-muted-foreground text-xs leading-relaxed mb-3 line-clamp-3">
+                <CardContent className="p-4 pt-1 flex-grow">
+                  <CardDescription className="text-muted-foreground text-[11px] leading-relaxed mb-3 line-clamp-3">
                     {project.description}
                   </CardDescription>
                   <div className="flex flex-wrap gap-1">
                     {project.technologies.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-secondary/50 text-[10px] px-2 py-0 h-4">
+                      <Badge key={tag} variant="secondary" className="bg-primary/5 text-primary border-primary/10 text-[9px] px-2 py-0 h-4">
                         {tag}
                       </Badge>
                     ))}
                   </div>
                 </CardContent>
-                <CardFooter className="p-4 pt-0 border-t border-border/30 mt-auto">
+                <CardFooter className="p-4 pt-0 border-t border-border/20 mt-auto">
                   <div className="flex justify-between w-full items-center pt-3">
                     {project.projectUrl && project.projectUrl !== '#' ? (
-                      <Button variant="link" size="sm" asChild className="p-0 h-auto text-xs text-primary hover:text-accent transition-colors">
+                      <Button variant="link" size="sm" asChild className="p-0 h-auto text-[11px] text-primary hover:text-accent transition-colors font-semibold">
                         <Link href={project.projectUrl} target="_blank" rel="noopener noreferrer">
-                          Live Demo <ExternalLink className="ml-1 h-3 w-3" />
+                          Live Demo <ExternalLink className="ml-1 h-2.5 w-2.5" />
                         </Link>
                       </Button>
                     ) : (
-                      <span className="text-[10px] text-muted-foreground italic">Work in progress</span>
+                      <span className="text-[9px] text-muted-foreground italic">Private Project</span>
                     )}
 
                     {project.githubUrl && project.githubUrl !== '#' && (
-                      <Button variant="ghost" size="icon" asChild className="h-7 w-7 rounded-full text-muted-foreground hover:text-primary">
+                      <Button variant="ghost" size="icon" asChild className="h-6 w-6 rounded-full text-muted-foreground hover:text-primary">
                           <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                            <Github className="h-4 w-4" />
+                            <Github className="h-3 w-3" />
                           </Link>
                       </Button>
                     )}

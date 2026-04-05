@@ -9,7 +9,6 @@ import { profileData } from '@/lib/profile-data';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Map skill names to icons and colors
 const skillMeta: Record<string, { icon: React.ElementType; color: string }> = {
   'React.js': { icon: Component, color: 'text-sky-400' },
   'C++': { icon: Braces, color: 'text-blue-600' },
@@ -28,18 +27,14 @@ export default function SkillsSection() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const title = titleRef.current;
-    const grid = gridRef.current;
-
-    if (!section || !title || !grid) return;
+    if (!sectionRef.current || !titleRef.current || !gridRef.current) return;
 
     const skillCards = gsap.utils.toArray<HTMLElement>('.skill-card-item');
 
     const ctx = gsap.context(() => {
-      gsap.from(title, {
+      gsap.from(titleRef.current, {
         scrollTrigger: {
-          trigger: section,
+          trigger: sectionRef.current,
           start: 'top 80%',
           toggleActions: 'play none none none',
         },
@@ -51,18 +46,18 @@ export default function SkillsSection() {
 
       gsap.from(skillCards, {
         scrollTrigger: {
-          trigger: grid,
+          trigger: gridRef.current,
           start: 'top 90%',
           toggleActions: 'play none none none',
         },
         opacity: 0,
         y: 20,
-        scale: 0.95,
+        scale: 0.9,
         duration: 0.5,
         ease: 'power2.out',
         stagger: 0.05,
       });
-    }, section);
+    }, sectionRef);
 
     return () => {
       ctx.revert();
@@ -70,21 +65,21 @@ export default function SkillsSection() {
   }, []);
 
   return (
-    <section id="skills" ref={sectionRef} className="py-12 sm:py-20 overflow-hidden">
+    <section id="skills" ref={sectionRef} className="py-16 sm:py-24 overflow-hidden bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 ref={titleRef} className="text-2xl sm:text-4xl font-bold text-center mb-10 sm:mb-16 font-headline">
-          <span className="regular-text">My </span>
-          <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Skills</span>
+        <h2 ref={titleRef} className="text-3xl sm:text-5xl font-bold text-center mb-12 sm:mb-20 font-headline">
+          <span className="regular-text">Technical </span>
+          <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Expertise</span>
         </h2>
-        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-8 max-w-3xl mx-auto">
+        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 sm:gap-6 max-w-5xl mx-auto">
           {profileData.skills.map((skill) => {
             const meta = skillMeta[skill.name] || { icon: CodeSquare, color: 'text-primary' };
             const Icon = meta.icon;
             return (
               <div key={skill.name} className="skill-card-item group">
-                <div className="flex flex-col items-center justify-center p-3 sm:p-6 bg-card/60 backdrop-blur-lg border border-border/20 rounded-xl shadow-md h-full transition-all duration-300 transform-gpu hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
-                  <Icon className={cn("h-8 w-8 sm:h-12 sm:w-12 mb-2 sm:mb-4 transition-transform duration-300 group-hover:scale-110", meta.color)} />
-                  <p className="text-[10px] sm:text-sm font-medium text-center text-card-foreground line-clamp-1">{skill.name}</p>
+                <div className="flex flex-col items-center justify-center p-3 sm:p-5 bg-card/80 backdrop-blur-md border border-border/40 rounded-2xl shadow-sm h-full transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-xl hover:border-primary/50">
+                  <Icon className={cn("h-7 w-7 sm:h-10 sm:w-10 mb-2 sm:mb-3 transition-transform duration-500 group-hover:rotate-6", meta.color)} />
+                  <p className="text-[10px] sm:text-sm font-semibold text-center text-card-foreground line-clamp-1">{skill.name}</p>
                 </div>
               </div>
             );

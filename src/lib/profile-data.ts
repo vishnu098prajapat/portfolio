@@ -68,7 +68,7 @@ export const profileData: ProfileData = {
       name: "Resume Builder",
       description: "A professional web application for creating resumes easily with customizable templates and AI assistance.",
       technologies: ["React", "Web App", "AI"],
-      imageUrl: "/images/res.png",
+      imageUrl: "/images/rsume.png",
       imageHint: 'resume builder',
       projectUrl: "https://resume-builder-ten-black.vercel.app/",
       githubUrl: "#",

@@ -31,12 +31,12 @@ export default function HomeSection() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative flex items-center justify-center overflow-hidden py-12 md:py-24"
+      className="relative flex items-center justify-center overflow-hidden py-8 md:py-16"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
-          <div className="text-center md:text-left order-2 md:order-1 -mt-8 md:mt-0">
+          <div className="text-center md:text-left order-2 md:order-1 -mt-4 md:mt-0">
             <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-foreground mb-4 font-headline leading-tight gsap-hero-text">
               {profileData.personalInfo.name}
             </h1>

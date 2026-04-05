@@ -15,8 +15,8 @@ export const profileData: ProfileData = {
     resumeUrl: "#", 
   },
   summary:
-    "Experienced in building complete web applications, from frontend to backend and database, often enhanced with AI to improve speed and quality.",
-  bio: "I am a dedicated Full Stack Developer with a strong focus on AI integration and automation. Over the past few years, I've built various SaaS platforms, automation tools, and AI-powered applications. My goal is to bridge the gap between complex backend systems and intuitive user interfaces, creating seamless digital experiences.",
+    "Full Stack Web Developer with AI hands-on experience in designing and developing modern web applications using React, Node.js, and Firebase.",
+  bio: "Full Stack Web Developer with AI hands-on experience in designing and developing modern web applications using HTML, CSS, JavaScript, React.js, APIs, and Firebase. Strong understanding of frontend architecture, responsive UI development, and backend integration with authentication and databases. Basic understanding of Machine Learning concepts including supervised and unsupervised learning.",
   skills: [
     { name: "React.js", endorsement: 25 },
     { name: "C++", endorsement: 20 },

@@ -32,15 +32,16 @@ export interface ProfileData {
     title: string;
     location: string;
     avatar: string;
+    aboutAvatar?: string; // Added separate image for about section
     email: string;
     phone: string;
     linkedin: string;
     github: string;
     portfolioUrl: string;
-    resumeUrl: string; // Added resume URL
+    resumeUrl: string;
   };
   summary: string;
-  bio: string; // Added bio for About section
+  bio: string;
   skills: { name: string; endorsement: number }[];
   projects: Project[];
   experience: Experience[];

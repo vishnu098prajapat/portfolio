@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -6,16 +5,11 @@ import { Button } from '@/components/ui/button';
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { Briefcase, Code, Download, User } from 'lucide-react';
+import { Download, User } from 'lucide-react';
 import Image from 'next/image';
 import { profileData } from '@/lib/profile-data';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const stats = [
-    { icon: Briefcase, value: '10+', label: 'Projects Done' },
-    { icon: Code, value: 'Full Stack', label: 'Development' },
-]
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -56,9 +50,9 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Image Column */}
             <div className="relative flex justify-center gsap-about-item">
-              <div className="relative w-full max-w-[300px] aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-border group bg-background">
+              <div className="relative w-full max-w-[320px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-background group bg-background transition-transform duration-500 hover:scale-[1.02]">
                 <Image
-                  src={profileData.personalInfo.avatar}
+                  src={profileData.personalInfo.aboutAvatar || profileData.personalInfo.avatar}
                   alt="About Vishnu"
                   fill
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
@@ -78,23 +72,22 @@ export default function AboutSection() {
               </p>
               
               <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <Card key={index} className="bg-background border border-border/50 shadow-sm rounded-xl overflow-hidden group hover:shadow-md transition-all">
-                    <CardContent className="flex items-center gap-3 p-4">
-                      <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
-                        <stat.icon className="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-base font-bold text-foreground">{stat.value}</p>
-                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">{stat.label}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                <Card className="bg-background border border-border/50 shadow-sm rounded-2xl overflow-hidden group hover:shadow-md transition-all">
+                  <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                    <p className="text-2xl font-bold text-primary mb-1">10+</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Projects Done</p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-background border border-border/50 shadow-sm rounded-2xl overflow-hidden group hover:shadow-md transition-all">
+                  <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                    <p className="text-2xl font-bold text-primary mb-1">Full Stack</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Expertise</p>
+                  </CardContent>
+                </Card>
               </div>
 
               <div className="pt-6">
-                <Button asChild className="bg-primary hover:bg-primary/90 rounded-lg px-8 h-12 text-sm font-semibold shadow-lg transition-all hover:-translate-y-1">
+                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 rounded-xl px-10 shadow-xl transition-all hover:-translate-y-1">
                   <a href={profileData.personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer">
                     Download CV <Download className="ml-2 h-4 w-4" />
                   </a>

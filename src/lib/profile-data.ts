@@ -26,7 +26,7 @@ export const profileData: ProfileData = {
   projects: [
     {
       name: "Sparrowfy",
-      description: "A comprehensive SaaS platform for coaching management, optimizing student and schedule tracking with a modern dashboard.",
+      description: "A comprehensive SaaS platform for coaching management, currently in testing, optimizing student and schedule tracking with a modern dashboard.",
       technologies: ["React.js", "API", "SaaS"],
       imageUrl: "/image/Untitled design.png",
       imageHint: 'coaching management',
@@ -35,7 +35,7 @@ export const profileData: ProfileData = {
     },
     {
       name: "InstaAutomation",
-      description: "Automated Instagram interaction tool that handles comment replies and direct messages for improved audience engagement.",
+      description: "Smart Instagram tool that automates comment replies and direct messages, ensuring instant engagement with your audience.",
       technologies: ["React", "Automation"],
       imageUrl: "/image/insta.jpg",
       imageHint: 'instagram automation',

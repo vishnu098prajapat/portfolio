@@ -1,4 +1,3 @@
-
 import type { ProfileData } from './types';
 
 export const profileData: ProfileData = {
@@ -12,9 +11,11 @@ export const profileData: ProfileData = {
     linkedin: "https://www.linkedin.com/in/vishnuprajapattt/",
     github: "https://github.com/vishnuprajapattt",
     portfolioUrl: "https://vishnu-portfolio.vercel.app",
+    resumeUrl: "#", // Placeholder for resume link
   },
   summary:
     "Experienced in building complete web applications, from frontend to backend and database, often enhanced with AI to improve speed and quality.",
+  bio: "I am a dedicated Full Stack Developer with a strong focus on AI integration and automation. Over the past few years, I've built various SaaS platforms, automation tools, and AI-powered applications. My goal is to bridge the gap between complex backend systems and intuitive user interfaces, creating seamless digital experiences.",
   skills: [
     { name: "React.js", endorsement: 25 },
     { name: "C++", endorsement: 20 },

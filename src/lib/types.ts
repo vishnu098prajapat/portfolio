@@ -37,8 +37,10 @@ export interface ProfileData {
     linkedin: string;
     github: string;
     portfolioUrl: string;
+    resumeUrl: string; // Added resume URL
   };
   summary: string;
+  bio: string; // Added bio for About section
   skills: { name: string; endorsement: number }[];
   projects: Project[];
   experience: Experience[];

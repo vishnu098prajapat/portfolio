@@ -9,7 +9,7 @@ export const profileData: ProfileData = {
     email: "vishanuprajapati888@gmail.com",
     phone: "+91 6377749427",
     linkedin: "https://www.linkedin.com/in/vishnuprajapattt/",
-    github: "https://github.com/vishprajapattt",
+    github: "https://github.com/vishnuprajapattt",
     portfolioUrl: "https://vishnu-portfolio.vercel.app",
   },
   summary:

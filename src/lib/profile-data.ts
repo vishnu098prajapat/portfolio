@@ -29,7 +29,7 @@ export const profileData: ProfileData = {
       name: "Sparrowfy",
       description: "A comprehensive SaaS platform for coaching management, optimizing student tracking and scheduling with a modern dashboard.",
       technologies: ["React.js", "API", "SaaS"],
-      imageUrl: "/images/aiquizcraft.png",
+      imageUrl: "/images/Untitled design.png",
       imageHint: 'coaching management',
       projectUrl: "https://aiquizcraft.com",
       githubUrl: "#",

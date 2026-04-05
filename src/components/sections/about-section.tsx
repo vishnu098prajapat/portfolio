@@ -19,7 +19,6 @@ const stats = [
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,36 +45,24 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-16 sm:py-24 bg-muted/30">
+    <section id="about" ref={sectionRef} className="py-20 sm:py-28 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 font-headline gsap-about-item">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 font-headline gsap-about-item">
             <span className="regular-text">About </span>
             <span className="text-primary">Me</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Image Column */}
             <div className="relative flex justify-center gsap-about-item">
-              <div className="relative w-full max-w-[320px] aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-background">
+              <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-background group">
                 <Image
                   src={profileData.personalInfo.avatar}
                   alt="About Vishnu"
                   fill
-                  className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
-              </div>
-              {/* Floating Stat Overlay */}
-              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-background p-4 rounded-xl shadow-xl border border-border/50 hidden sm:block">
-                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                        <Briefcase className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                        <p className="text-lg font-bold leading-none">10+</p>
-                        <p className="text-[10px] text-muted-foreground uppercase font-semibold">Projects</p>
-                    </div>
-                 </div>
               </div>
             </div>
 
@@ -106,8 +93,8 @@ export default function AboutSection() {
                 ))}
               </div>
 
-              <div className="pt-4">
-                <Button asChild className="bg-primary hover:bg-primary/90 rounded-full px-6 h-11 text-sm font-semibold shadow-lg">
+              <div className="pt-6">
+                <Button asChild className="bg-primary hover:bg-primary/90 rounded-xl px-8 h-12 text-sm font-semibold shadow-lg transition-all hover:-translate-y-1">
                   <a href={profileData.personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer">
                     Download CV <Download className="ml-2 h-4 w-4" />
                   </a>

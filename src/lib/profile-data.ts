@@ -1,3 +1,4 @@
+
 import type { ProfileData } from './types';
 
 export const profileData: ProfileData = {
@@ -11,7 +12,7 @@ export const profileData: ProfileData = {
     linkedin: "https://www.linkedin.com/in/vishnuprajapattt/",
     github: "https://github.com/vishnuprajapattt",
     portfolioUrl: "https://vishnu-portfolio.vercel.app",
-    resumeUrl: "#", // Placeholder for resume link
+    resumeUrl: "#", 
   },
   summary:
     "Experienced in building complete web applications, from frontend to backend and database, often enhanced with AI to improve speed and quality.",
@@ -96,7 +97,7 @@ export const profileData: ProfileData = {
   education: [
     {
       degree: "Bachelor of Technology",
-      institution: "Your Institution Name",
+      institution: "CS Engineering",
       location: "India",
       startDate: "2021",
       endDate: "2025",

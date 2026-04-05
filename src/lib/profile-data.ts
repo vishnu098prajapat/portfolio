@@ -6,7 +6,7 @@ export const profileData: ProfileData = {
     title: "AI Full Stack Developer",
     location: "India",
     avatar: "/images/my.png",
-    aboutAvatar: "/images/about1.png", // Added the new about image
+    aboutAvatar: "/images/about1.png",
     email: "vishanuprajapati888@gmail.com",
     phone: "+91 6377749427",
     linkedin: "https://www.linkedin.com/in/vishnuprajapattt/",

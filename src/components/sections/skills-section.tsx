@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useRef } from 'react';
@@ -72,15 +71,15 @@ export default function SkillsSection() {
           <span className="regular-text">Technical </span>
           <span className="text-primary">Skills</span>
         </h2>
-        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-4 max-w-4xl mx-auto">
+        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-4 max-w-6xl mx-auto">
           {profileData.skills.map((skill) => {
             const meta = skillMeta[skill.name] || { icon: CodeSquare, color: 'text-primary' };
             const Icon = meta.icon;
             return (
               <div key={skill.name} className="skill-card-item group">
-                <div className="flex flex-col items-center justify-center p-2 sm:p-3 bg-card/80 backdrop-blur-md border border-border/40 rounded-xl shadow-sm h-full transition-all duration-300 transform-gpu hover:-translate-y-1 hover:shadow-md hover:border-primary/50">
-                  <Icon className={cn("h-5 w-5 sm:h-6 sm:w-6 mb-1 sm:mb-1.5 transition-transform duration-500 group-hover:rotate-6", meta.color)} />
-                  <p className="text-[8px] sm:text-[10px] font-semibold text-center text-card-foreground line-clamp-1">{skill.name}</p>
+                <div className="flex flex-col items-center justify-center p-3 sm:p-4 bg-card/80 backdrop-blur-md border border-border/40 rounded-xl shadow-sm h-full transition-all duration-300 transform-gpu hover:-translate-y-1 hover:shadow-md hover:border-primary/50">
+                  <Icon className={cn("h-6 w-6 sm:h-8 sm:w-8 mb-2 transition-transform duration-500 group-hover:rotate-6", meta.color)} />
+                  <p className="text-[10px] sm:text-xs font-semibold text-center text-card-foreground line-clamp-1">{skill.name}</p>
                 </div>
               </div>
             );

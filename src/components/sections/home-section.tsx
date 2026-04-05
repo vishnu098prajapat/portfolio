@@ -31,12 +31,13 @@ export default function HomeSection() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative flex items-center justify-center overflow-hidden py-12 sm:py-20 md:py-24"
+      className="relative flex items-center justify-center overflow-hidden py-8 sm:py-16 md:py-20"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Adjusted spacing to push content higher (removed large margins) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
           
-          <div className="text-center md:text-left order-2 md:order-1 -mt-4 md:mt-0">
+          <div className="text-center md:text-left order-2 md:order-1 -mt-8 md:mt-0">
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-3 font-headline leading-tight gsap-hero-text">
               {profileData.personalInfo.name}
             </h1>
@@ -64,6 +65,7 @@ export default function HomeSection() {
             <div className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-72 lg:h-72 gsap-hero-image-wrapper">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-accent to-secondary opacity-20 blur-3xl animate-pulse" />
                 
+                {/* Rounded profile image with premium border */}
                 <div className="relative w-full h-full p-1 rounded-full bg-gradient-to-r from-primary via-accent to-secondary shadow-2xl">
                     <div className="w-full h-full rounded-full overflow-hidden border-4 border-background">
                         <Image

@@ -11,11 +11,11 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-background border-t py-8 mt-12">
+    <footer className="bg-background border-t py-10 mt-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center gap-4">
           <SocialIcons />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-[11px] sm:text-xs text-muted-foreground tracking-wide uppercase font-medium">
             &copy; {year || '...'} All rights reserved.
           </p>
         </div>

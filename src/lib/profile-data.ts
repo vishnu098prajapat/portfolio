@@ -61,7 +61,7 @@ export const profileData: ProfileData = {
       technologies: ["React", "Utility", "Tools"],
       imageUrl: "/images/img_pdf.png",
       imageHint: 'pdf utility tool',
-      projectUrl: "#",
+      projectUrl: "https://studio--studio-7834146289-df62e.us-central1.hosted.app/",
       githubUrl: "#",
     },
     {

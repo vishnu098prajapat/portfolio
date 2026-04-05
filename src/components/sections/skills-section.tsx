@@ -1,9 +1,10 @@
+
 "use client";
 
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { BrainCircuit, Braces, Component, Flame, Github, CodeSquare, BarChart3, Sparkles } from 'lucide-react';
+import { BrainCircuit, Braces, Component, Flame, Github, Code, BarChart3, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { profileData } from '@/lib/profile-data';
 
@@ -12,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const skillMeta: Record<string, { icon: React.ElementType; color: string }> = {
   'React.js': { icon: Component, color: 'text-sky-400' },
   'C++': { icon: Braces, color: 'text-blue-600' },
-  'Python': { icon: CodeSquare, color: 'text-yellow-400' },
+  'Python': { icon: Code, color: 'text-yellow-400' },
   'DSA': { icon: BrainCircuit, color: 'text-green-500' },
   'Github': { icon: Github, color: 'text-foreground' },
   'Firebase': { icon: Flame, color: 'text-yellow-500' },
@@ -68,12 +69,11 @@ export default function SkillsSection() {
     <section id="skills" ref={sectionRef} className="py-12 sm:py-20 overflow-hidden bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 ref={titleRef} className="text-3xl sm:text-4xl font-bold text-center mb-10 sm:mb-16 font-headline">
-          <span className="regular-text">Technical </span>
           <span className="text-primary">Skills</span>
         </h2>
         <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-4 max-w-6xl mx-auto">
           {profileData.skills.map((skill) => {
-            const meta = skillMeta[skill.name] || { icon: CodeSquare, color: 'text-primary' };
+            const meta = skillMeta[skill.name] || { icon: Code, color: 'text-primary' };
             const Icon = meta.icon;
             return (
               <div key={skill.name} className="skill-card-item group">

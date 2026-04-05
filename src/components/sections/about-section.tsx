@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -38,18 +39,18 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 sm:py-28 bg-muted/10">
+    <section id="about" ref={sectionRef} className="py-24 sm:py-32 bg-muted/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12 font-headline gsap-about-item">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 font-headline gsap-about-item">
             <span className="regular-text">About </span>
             <span className="text-primary">Me</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             {/* Image Column */}
             <div className="relative flex justify-center gsap-about-item">
-              <div className="relative w-full max-w-[300px] aspect-square rounded-xl overflow-hidden shadow-xl border border-white group bg-background transition-transform duration-500 hover:scale-[1.01]">
+              <div className="relative w-full max-w-[380px] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-white/20 group bg-background transition-transform duration-500 hover:scale-[1.01]">
                 <Image
                   src={profileData.personalInfo.aboutAvatar || profileData.personalInfo.avatar}
                   alt="About Vishnu"
@@ -60,27 +61,27 @@ export default function AboutSection() {
             </div>
 
             {/* Content Column */}
-            <div className="space-y-5 gsap-about-item">
-              <div className="p-1 bg-primary/5 rounded-full w-fit mb-1">
-                 <div className="px-3 py-1 bg-background rounded-full text-[10px] font-bold text-primary flex items-center gap-2">
-                    <User className="h-3 w-3" /> Vishnu Prajapat
+            <div className="space-y-6 gsap-about-item">
+              <div className="p-1.5 bg-primary/5 rounded-full w-fit mb-2">
+                 <div className="px-4 py-1.5 bg-background rounded-full text-xs font-bold text-primary flex items-center gap-2">
+                    <User className="h-4 w-4" /> Vishnu Prajapat
                  </div>
               </div>
-              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                 {profileData.bio}
               </p>
               
-              <div className="grid grid-cols-2 gap-3">
-                <Card className="bg-background border border-border/40 shadow-sm rounded-lg overflow-hidden group hover:shadow-md transition-all">
-                  <CardContent className="flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-lg font-bold text-primary mb-0.5">Full Stack</p>
-                    <p className="text-[9px] text-muted-foreground uppercase tracking-wider font-bold">Expertise</p>
+              <div className="grid grid-cols-2 gap-4 pt-4">
+                <Card className="bg-background border border-border/40 shadow-sm rounded-xl overflow-hidden group hover:shadow-md transition-all">
+                  <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                    <p className="text-2xl font-bold text-primary mb-1">Full Stack</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Expertise</p>
                   </CardContent>
                 </Card>
-                <Card className="bg-background border border-border/40 shadow-sm rounded-lg overflow-hidden group hover:shadow-md transition-all">
-                  <CardContent className="flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-lg font-bold text-primary mb-0.5">AI-Powered</p>
-                    <p className="text-[9px] text-muted-foreground uppercase tracking-wider font-bold">Solutions</p>
+                <Card className="bg-background border border-border/40 shadow-sm rounded-xl overflow-hidden group hover:shadow-md transition-all">
+                  <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                    <p className="text-2xl font-bold text-primary mb-1">AI-Powered</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Solutions</p>
                   </CardContent>
                 </Card>
               </div>

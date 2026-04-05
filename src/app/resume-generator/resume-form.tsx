@@ -12,18 +12,17 @@ import { useState } from 'react';
 import { Loader2, Plus, Sparkles, Trash2, User, Briefcase, GraduationCap, Wrench, FolderGit2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useToast } from '@/hooks/use-toast';
 
-const AiResumeGenerationInputSchema = z.object({
+const ResumeFormSchema = z.object({
   personalInfo: z.object({
     name: z.string().min(1, 'Name is required'),
     email: z.string().email('Invalid email address'),
     phone: z.string().optional(),
-    linkedin: z.string().url('Invalid URL').optional(),
-    github: z.string().url('Invalid URL').optional(),
-    portfolioUrl: z.string().url('Invalid URL').optional(),
+    linkedin: z.string().url('Invalid URL').optional().or(z.literal('')),
+    github: z.string().url('Invalid URL').optional().or(z.literal('')),
+    portfolioUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
   }),
   summary: z.string().optional(),
   experience: z.array(z.object({
@@ -42,16 +41,18 @@ const AiResumeGenerationInputSchema = z.object({
     endDate: z.string().min(1, 'End date is required'),
     description: z.string().optional(),
   })),
-  skills: z.array(z.string().min(1, 'Skill cannot be empty')),
+  skills: z.array(z.object({
+      name: z.string().min(1, 'Skill name is required')
+  })),
   projects: z.array(z.object({
     name: z.string().min(1, 'Project name is required'),
     description: z.string().min(1, 'Description is required'),
-    technologies: z.array(z.string().min(1, 'Technology cannot be empty')),
-    projectUrl: z.string().url('Invalid URL').optional(),
+    technologies: z.array(z.object({ name: z.string() })),
+    projectUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
   })).optional(),
 });
 
-type ResumeFormValues = z.infer<typeof AiResumeGenerationInputSchema>;
+type ResumeFormValues = z.infer<typeof ResumeFormSchema>;
 
 export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -59,8 +60,14 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
   const { toast } = useToast();
 
   const form = useForm<ResumeFormValues>({
-    resolver: zodResolver(AiResumeGenerationInputSchema),
-    defaultValues,
+    resolver: zodResolver(ResumeFormSchema),
+    defaultValues: defaultValues || {
+        personalInfo: { name: '', email: '', phone: '', linkedin: '', github: '', portfolioUrl: '' },
+        experience: [],
+        education: [],
+        skills: [],
+        projects: []
+    },
     mode: 'onChange',
   });
 
@@ -73,22 +80,30 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
   const onSubmit = async (data: ResumeFormValues) => {
     setIsLoading(true);
     setGeneratedResume(null);
-    const result = await createResumeAction(data);
-    setIsLoading(false);
-
-    if (result.success) {
-      setGeneratedResume(result.resumeText);
-    } else {
-      toast({
-        variant: 'destructive',
-        title: 'An error occurred',
-        description: result.error,
-      });
+    try {
+        const result = await createResumeAction(data as any);
+        if (result.success) {
+          setGeneratedResume(result.resumeText || '');
+        } else {
+          toast({
+            variant: 'destructive',
+            title: 'An error occurred',
+            description: result.error,
+          });
+        }
+    } catch (e) {
+        toast({
+            variant: 'destructive',
+            title: 'Submission failed',
+            description: 'Could not connect to the generation service.'
+        });
+    } finally {
+        setIsLoading(false);
     }
   };
   
   const SectionHeader = ({ icon, title }: { icon: React.ReactNode, title: string }) => (
-    <div className="flex items-center gap-3 text-lg font-headline text-primary">
+    <div className="flex items-center gap-3 text-lg font-headline font-semibold text-primary">
       {icon}
       <span>{title}</span>
     </div>
@@ -98,10 +113,10 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <Accordion type="multiple" defaultValue={['item-1']} className="w-full">
-            <AccordionItem value="item-1">
-                <AccordionTrigger>
-                    <SectionHeader icon={<User />} title="Personal Information" />
+          <Accordion type="multiple" defaultValue={['personal']} className="w-full border rounded-lg overflow-hidden">
+            <AccordionItem value="personal" className="border-none">
+                <AccordionTrigger className="hover:no-underline px-4 bg-muted/50">
+                    <SectionHeader icon={<User className="w-5 h-5" />} title="Personal Information" />
                 </AccordionTrigger>
                 <AccordionContent className="p-4 space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -115,18 +130,18 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
                 </AccordionContent>
             </AccordionItem>
             
-            <AccordionItem value="item-2">
-                <AccordionTrigger><SectionHeader icon={<User />} title="Professional Summary" /></AccordionTrigger>
+            <AccordionItem value="summary" className="border-t border-border/40">
+                <AccordionTrigger className="hover:no-underline px-4 bg-muted/50"><SectionHeader icon={<User className="w-5 h-5" />} title="Professional Summary" /></AccordionTrigger>
                 <AccordionContent className="p-4">
-                    <FormField control={form.control} name="summary" render={({ field }) => (<FormItem><FormLabel>Summary</FormLabel><FormControl><Textarea {...field} rows={5} /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={form.control} name="summary" render={({ field }) => (<FormItem><FormLabel>Summary</FormLabel><FormControl><Textarea {...field} rows={5} placeholder="Describe your professional highlights..." /></FormControl><FormMessage /></FormItem>)} />
                 </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-3">
-              <AccordionTrigger><SectionHeader icon={<Briefcase />} title="Work Experience" /></AccordionTrigger>
+            <AccordionItem value="experience" className="border-t border-border/40">
+              <AccordionTrigger className="hover:no-underline px-4 bg-muted/50"><SectionHeader icon={<Briefcase className="w-5 h-5" />} title="Work Experience" /></AccordionTrigger>
               <AccordionContent className="p-4 space-y-6">
                 {expFields.map((field, index) => (
-                  <div key={field.id} className="p-4 border rounded-lg space-y-4 relative">
+                  <div key={field.id} className="p-4 border rounded-lg space-y-4 relative bg-card/50">
                     <FormField control={form.control} name={`experience.${index}.title`} render={({ field }) => <FormItem><FormLabel>Title</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                     <FormField control={form.control} name={`experience.${index}.company`} render={({ field }) => <FormItem><FormLabel>Company</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                     <div className="grid md:grid-cols-3 gap-4">
@@ -138,15 +153,15 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
                     <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2" onClick={() => removeExp(index)}><Trash2 className="w-4 h-4" /></Button>
                   </div>
                 ))}
-                <Button type="button" variant="outline" onClick={() => appendExp({ title: '', company: '', location: '', startDate: '', endDate: '', description: '' })}><Plus className="mr-2 h-4 w-4" /> Add Experience</Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => appendExp({ title: '', company: '', location: '', startDate: '', endDate: '', description: '' })}><Plus className="mr-2 h-4 w-4" /> Add Experience</Button>
               </AccordionContent>
             </AccordionItem>
             
-            <AccordionItem value="item-4">
-              <AccordionTrigger><SectionHeader icon={<GraduationCap />} title="Education" /></AccordionTrigger>
+            <AccordionItem value="education" className="border-t border-border/40">
+              <AccordionTrigger className="hover:no-underline px-4 bg-muted/50"><SectionHeader icon={<GraduationCap className="w-5 h-5" />} title="Education" /></AccordionTrigger>
               <AccordionContent className="p-4 space-y-6">
                 {eduFields.map((field, index) => (
-                    <div key={field.id} className="p-4 border rounded-lg space-y-4 relative">
+                    <div key={field.id} className="p-4 border rounded-lg space-y-4 relative bg-card/50">
                         <FormField control={form.control} name={`education.${index}.degree`} render={({ field }) => <FormItem><FormLabel>Degree</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                         <FormField control={form.control} name={`education.${index}.institution`} render={({ field }) => <FormItem><FormLabel>Institution</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                         <div className="grid md:grid-cols-3 gap-4">
@@ -158,28 +173,30 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
                         <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2" onClick={() => removeEdu(index)}><Trash2 className="w-4 h-4" /></Button>
                     </div>
                 ))}
-                <Button type="button" variant="outline" onClick={() => appendEdu({ degree: '', institution: '', location: '', startDate: '', endDate: '', description: '' })}><Plus className="mr-2 h-4 w-4" /> Add Education</Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => appendEdu({ degree: '', institution: '', location: '', startDate: '', endDate: '', description: '' })}><Plus className="mr-2 h-4 w-4" /> Add Education</Button>
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-5">
-              <AccordionTrigger><SectionHeader icon={<Wrench />} title="Skills" /></AccordionTrigger>
+            <AccordionItem value="skills" className="border-t border-border/40">
+              <AccordionTrigger className="hover:no-underline px-4 bg-muted/50"><SectionHeader icon={<Wrench className="w-5 h-5" />} title="Skills" /></AccordionTrigger>
               <AccordionContent className="p-4 space-y-4">
-                {skillFields.map((field, index) => (
-                  <div key={field.id} className="flex gap-2 items-center">
-                    <FormField control={form.control} name={`skills.${index}`} render={({ field }) => <FormItem className="flex-grow"><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
-                    <Button type="button" variant="ghost" size="icon" onClick={() => removeSkill(index)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
-                  </div>
-                ))}
-                <Button type="button" variant="outline" onClick={() => appendSkill('')}><Plus className="mr-2 h-4 w-4" /> Add Skill</Button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    {skillFields.map((field, index) => (
+                      <div key={field.id} className="flex gap-2 items-center">
+                        <FormField control={form.control} name={`skills.${index}.name`} render={({ field }) => <FormItem className="flex-grow"><FormControl><Input {...field} placeholder="Skill name" /></FormControl><FormMessage /></FormItem>} />
+                        <Button type="button" variant="ghost" size="icon" onClick={() => removeSkill(index)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
+                      </div>
+                    ))}
+                </div>
+                <Button type="button" variant="outline" size="sm" onClick={() => appendSkill({ name: '' })}><Plus className="mr-2 h-4 w-4" /> Add Skill</Button>
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-6">
-                <AccordionTrigger><SectionHeader icon={<FolderGit2 />} title="Projects" /></AccordionTrigger>
+            <AccordionItem value="projects" className="border-t border-border/40">
+                <AccordionTrigger className="hover:no-underline px-4 bg-muted/50"><SectionHeader icon={<FolderGit2 className="w-5 h-5" />} title="Projects" /></AccordionTrigger>
                 <AccordionContent className="p-4 space-y-6">
                     {projectFields.map((field, index) => (
-                        <div key={field.id} className="p-4 border rounded-lg space-y-4 relative">
+                        <div key={field.id} className="p-4 border rounded-lg space-y-4 relative bg-card/50">
                             <FormField control={form.control} name={`projects.${index}.name`} render={({ field }) => <FormItem><FormLabel>Project Name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                             <FormField control={form.control} name={`projects.${index}.projectUrl`} render={({ field }) => <FormItem><FormLabel>Project URL</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                             <FormField control={form.control} name={`projects.${index}.description`} render={({ field }) => <FormItem><FormLabel>Description</FormLabel><FormControl><Textarea {...field} /></FormControl><FormMessage /></FormItem>} />
@@ -192,8 +209,8 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
                                   <FormControl>
                                     <Input 
                                       {...field} 
-                                      value={Array.isArray(field.value) ? field.value.join(', ') : ''}
-                                      onChange={(e) => field.onChange(e.target.value.split(',').map(s => s.trim()).filter(Boolean))} 
+                                      value={Array.isArray(field.value) ? field.value.map(t => t.name).join(', ') : ''}
+                                      onChange={(e) => field.onChange(e.target.value.split(',').map(s => ({ name: s.trim() })).filter(t => t.name))} 
                                     />
                                   </FormControl>
                                   <FormMessage />
@@ -203,37 +220,42 @@ export function ResumeForm({ defaultValues }: { defaultValues: ResumeFormValues 
                             <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2" onClick={() => removeProject(index)}><Trash2 className="w-4 h-4" /></Button>
                         </div>
                     ))}
-                    <Button type="button" variant="outline" onClick={() => appendProject({ name: '', description: '', technologies: [], projectUrl: '' })}><Plus className="mr-2 h-4 w-4" /> Add Project</Button>
+                    <Button type="button" variant="outline" size="sm" onClick={() => appendProject({ name: '', description: '', technologies: [], projectUrl: '' })}><Plus className="mr-2 h-4 w-4" /> Add Project</Button>
                 </AccordionContent>
             </AccordionItem>
           </Accordion>
 
           <div className="flex justify-end pt-8">
-            <Button type="submit" size="lg" disabled={isLoading} className="bg-accent hover:bg-accent/90">
+            <Button type="submit" size="lg" disabled={isLoading} className="bg-primary hover:bg-primary/90 px-8">
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Sparkles className="mr-2 h-4 w-4" />
               )}
-              Generate Resume
+              {isLoading ? 'Generating...' : 'Generate Resume'}
             </Button>
           </div>
         </form>
       </Form>
 
       <Dialog open={!!generatedResume} onOpenChange={() => setGeneratedResume(null)}>
-        <DialogContent className="max-w-4xl h-[90vh]">
-          <DialogHeader>
-            <DialogTitle className="font-headline text-2xl text-primary">Your AI-Generated Resume</DialogTitle>
+        <DialogContent className="max-w-4xl h-[90vh] flex flex-col p-0 overflow-hidden">
+          <DialogHeader className="p-6 pb-2">
+            <DialogTitle className="font-headline text-2xl text-primary font-bold">Your AI-Generated Resume</DialogTitle>
             <DialogDescription>
-              Here is the professional resume created by our AI. You can copy and paste it into a document editor for further formatting.
+              Copy and paste this Markdown text into your favorite document editor.
             </DialogDescription>
           </DialogHeader>
-          <ScrollArea className="h-full w-full rounded-md border p-4 my-4">
-            <pre className="text-sm whitespace-pre-wrap font-body">{generatedResume}</pre>
-          </ScrollArea>
-           <DialogFooter>
-            <Button onClick={() => navigator.clipboard.writeText(generatedResume || '')}>Copy Text</Button>
+          <div className="flex-1 overflow-hidden px-6">
+            <ScrollArea className="h-full w-full rounded-md border bg-muted/30 p-4">
+              <pre className="text-sm whitespace-pre-wrap font-body leading-relaxed">{generatedResume}</pre>
+            </ScrollArea>
+          </div>
+           <DialogFooter className="p-6 pt-2">
+            <Button className="font-semibold" onClick={() => {
+                navigator.clipboard.writeText(generatedResume || '');
+                toast({ title: 'Copied!', description: 'Resume text copied to clipboard.' });
+            }}>Copy Text</Button>
             <Button variant="outline" onClick={() => setGeneratedResume(null)}>Close</Button>
           </DialogFooter>
         </DialogContent>

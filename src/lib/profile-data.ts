@@ -31,7 +31,7 @@ export const profileData: ProfileData = {
     {
       name: "Sparrowfy",
       description: "A comprehensive SaaS platform for coaching management, optimizing student tracking and scheduling.",
-      technologies: ["React.js", "API", "SaaS"],
+      technologies: [{ name: "React.js" }, { name: "API" }, { name: "SaaS" }],
       imageUrl: "/images/Untitled design.png",
       imageHint: 'coaching management',
       projectUrl: "https://aiquizcraft.com",
@@ -40,7 +40,7 @@ export const profileData: ProfileData = {
     {
       name: "InstaAutomation",
       description: "Intelligent tool for automating Instagram comment replies and DM workflows using React and modern scripts.",
-      technologies: ["React", "Automation"],
+      technologies: [{ name: "React" }, { name: "Automation" }],
       imageUrl: "/images/automation.png",
       imageHint: 'instagram automation',
       projectUrl: "#",
@@ -49,7 +49,7 @@ export const profileData: ProfileData = {
     {
       name: "ChatWithPDF",
       description: "AI-powered tool to interact with your PDF documents, extracting information using natural language.",
-      technologies: ["React", "AI", "PDF"],
+      technologies: [{ name: "React" }, { name: "AI" }, { name: "PDF" }],
       imageUrl: "/images/image.png",
       imageHint: 'ai chat pdf',
       projectUrl: "#",
@@ -58,7 +58,7 @@ export const profileData: ProfileData = {
     {
       name: "Image & PDF Tool",
       description: "A versatile toolkit for processing images and PDFs, including conversion and editing features.",
-      technologies: ["React", "Utility", "Tools"],
+      technologies: [{ name: "React" }, { name: "Utility" }, { name: "Tools" }],
       imageUrl: "/images/img_pdf.png",
       imageHint: 'pdf utility tool',
       projectUrl: "https://studio--studio-7834146289-df62e.us-central1.hosted.app/",
@@ -67,7 +67,7 @@ export const profileData: ProfileData = {
     {
       name: "Resume Builder",
       description: "A professional web application for creating resumes easily with customizable templates and AI assistance.",
-      technologies: ["React", "Web App", "AI"],
+      technologies: [{ name: "React" }, { name: "Web App" }, { name: "AI" }],
       imageUrl: "/images/rsume.png",
       imageHint: 'resume builder',
       projectUrl: "https://resume-builder-ten-black.vercel.app/",
@@ -76,7 +76,7 @@ export const profileData: ProfileData = {
     {
       name: "Online Gaming Platform",
       description: "A modern online gaming platform featuring a responsive interface and real-time state management.",
-      technologies: ["Vite", "React"],
+      technologies: [{ name: "Vite" }, { name: "React" }],
       imageUrl: "/images/gamee.png",
       imageHint: 'online gaming',
       projectUrl: "http://realonlinegaming.netlify.app",

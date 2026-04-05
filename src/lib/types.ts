@@ -1,7 +1,7 @@
 export interface Project {
   name: string;
   description: string;
-  technologies: string[];
+  technologies: { name: string }[];
   imageUrl: string;
   imageHint: string;
   projectUrl?: string;
@@ -11,7 +11,7 @@ export interface Project {
 export interface Experience {
   title: string;
   company: string;
-  location:string;
+  location: string;
   startDate: string;
   endDate: string;
   description: string;
@@ -32,7 +32,7 @@ export interface ProfileData {
     title: string;
     location: string;
     avatar: string;
-    aboutAvatar?: string; // Added separate image for about section
+    aboutAvatar?: string;
     email: string;
     phone: string;
     linkedin: string;

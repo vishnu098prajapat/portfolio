@@ -1,4 +1,3 @@
-
 'use server';
 import { generateAiResume, type AiResumeGenerationInput } from '@/ai/flows/ai-resume-generation-flow';
 import { z } from 'zod';
@@ -8,9 +7,9 @@ const AiResumeGenerationInputSchema = z.object({
     name: z.string(),
     email: z.string().email(),
     phone: z.string().optional(),
-    linkedin: z.string().url().optional(),
-    github: z.string().url().optional(),
-    portfolioUrl: z.string().url().optional(),
+    linkedin: z.string().url().optional().or(z.literal('')),
+    github: z.string().url().optional().or(z.literal('')),
+    portfolioUrl: z.string().url().optional().or(z.literal('')),
   }),
   summary: z.string().optional(),
   experience: z.array(z.object({
@@ -29,12 +28,12 @@ const AiResumeGenerationInputSchema = z.object({
     endDate: z.string(),
     description: z.string().optional(),
   })),
-  skills: z.array(z.string()),
+  skills: z.array(z.object({ name: z.string() })),
   projects: z.array(z.object({
     name: z.string(),
     description: z.string(),
-    technologies: z.array(z.string()),
-    projectUrl: z.string().url().optional(),
+    technologies: z.array(z.object({ name: z.string() })),
+    projectUrl: z.string().url().optional().or(z.literal('')),
   })).optional(),
 });
 
@@ -42,11 +41,12 @@ export async function createResumeAction(input: AiResumeGenerationInput) {
     const parsedInput = AiResumeGenerationInputSchema.safeParse(input);
     
     if (!parsedInput.success) {
-        return { success: false, error: "Invalid input." };
+        console.error('Validation error in createResumeAction:', parsedInput.error);
+        return { success: false, error: "Invalid input data provided." };
     }
 
   try {
-    const result = await generateAiResume(parsedInput.data);
+    const result = await generateAiResume(parsedInput.data as AiResumeGenerationInput);
     if (!result || !result.resumeText) {
         return { success: false, error: 'AI failed to generate a response.' };
     }

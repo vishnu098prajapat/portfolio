@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -90,9 +89,9 @@ export default function ProjectsSection() {
                     {project.description}
                   </CardDescription>
                   <div className="flex flex-wrap gap-1">
-                    {project.technologies.slice(0, 3).map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-primary/5 text-primary border-none text-[8px] sm:text-[9px] px-2 py-0.5 rounded-md">
-                        {tag}
+                    {project.technologies.slice(0, 3).map((tag, idx) => (
+                      <Badge key={idx} variant="secondary" className="bg-primary/5 text-primary border-none text-[8px] sm:text-[9px] px-2 py-0.5 rounded-md">
+                        {tag.name}
                       </Badge>
                     ))}
                   </div>

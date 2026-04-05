@@ -4,7 +4,7 @@
  *
  * - generateAiResume - A function that handles the resume generation process.
  * - AiResumeGenerationInput - The input type for the generateAiResume function.
- - AiResumeGenerationOutput - The return type for the generateAiResume function.
+ * - AiResumeGenerationOutput - The return type for the generateAiResume function.
  */
 
 import {ai} from '@/ai/genkit';
@@ -32,24 +32,24 @@ const EducationEntrySchema = z.object({
 const ProjectEntrySchema = z.object({
   name: z.string().describe('Name of the project.'),
   description: z.string().describe('Detailed description of the project, including technologies used and outcomes.'),
-  technologies: z.array(z.string()).describe('List of technologies used in the project.'),
-  projectUrl: z.string().url().optional().describe('Optional URL to the project.'),
+  technologies: z.array(z.object({ name: z.string() })).describe('List of technologies used in the project.'),
+  projectUrl: z.string().url().optional().or(z.literal('')).describe('Optional URL to the project.'),
 });
 
 const AiResumeGenerationInputSchema = z.object({
   personalInfo: z.object({
     name: z.string().describe("User's full name."),
     email: z.string().email().describe("User's email address."),
-    phone: z.string().optional().describe("User's phone number."),
-    linkedin: z.string().url().optional().describe("URL to user's LinkedIn profile."),
-    github: z.string().url().optional().describe("URL to user's GitHub profile."),
-    portfolioUrl: z.string().url().optional().describe("URL to user's personal portfolio."),
-  }).describe('Personal contact and online presence information.'),
-  summary: z.string().optional().describe('An optional professional summary provided by the user. If not provided, the AI will generate one.'),
-  experience: z.array(ExperienceEntrySchema).describe('List of work experiences.'),
-  education: z.array(EducationEntrySchema).describe('List of educational background entries.'),
-  skills: z.array(z.string()).describe('List of technical and soft skills.'),
-  projects: z.array(ProjectEntrySchema).optional().describe('List of personal or professional projects.'),
+    phone: z.string().optional(),
+    linkedin: z.string().url().optional().or(z.literal('')),
+    github: z.string().url().optional().or(z.literal('')),
+    portfolioUrl: z.string().url().optional().or(z.literal('')),
+  }),
+  summary: z.string().optional(),
+  experience: z.array(ExperienceEntrySchema),
+  education: z.array(EducationEntrySchema),
+  skills: z.array(z.object({ name: z.string() })),
+  projects: z.array(ProjectEntrySchema).optional(),
 });
 export type AiResumeGenerationInput = z.infer<typeof AiResumeGenerationInputSchema>;
 
@@ -77,7 +77,7 @@ const generateResumePrompt = ai.definePrompt({
   name: 'generateResumePrompt',
   input: { schema: AiResumeGenerationInputSchema },
   output: { schema: AiResumeGenerationOutputSchema },
-  prompt: `You are an expert resume writer. Your task is to generate a professional, modern, and premium-looking resume in Markdown format based on the provided user profile data.\n\nFollow these guidelines:\n1.  **Structure**: The resume should include the following sections in order:\n    *   Contact Information (Name, Email, Phone, LinkedIn, GitHub, Portfolio)\n    *   Summary/Objective\n    *   Experience\n    *   Education\n    *   Skills (Categorize if appropriate, e.g., Programming Languages, Frameworks, Tools)\n    *   Projects (Optional, if provided)\n2.  **Content**:\n    *   For Experience, Education, and Projects, the 'description' fields have been pre-summarized. Use them as provided.\n    *   If the user has not provided a summary, create a compelling one (2-3 sentences) based on their experience and skills.\n    *   Ensure consistent formatting and use strong action verbs.\n3.  **Formatting**:\n    *   Use Markdown headers (e.g., #, ##, ###) for sections.\n    *   Use bullet points for descriptions.\n\nHere is the user's profile data:\n\n# Personal Information\nName: {{{personalInfo.name}}}\nEmail: {{{personalInfo.email}}}{{#if personalInfo.phone}}\nPhone: {{{personalInfo.phone}}}{{/if}}{{#if personalInfo.linkedin}}\nLinkedIn: {{{personalInfo.linkedin}}}{{/if}}{{#if personalInfo.github}}\nGitHub: {{{personalInfo.github}}}{{/if}}{{#if personalInfo.portfolioUrl}}\nPortfolio: {{{personalInfo.portfolioUrl}}}{{/if}}\n\n# Summary\n{{#if summary}}{{{summary}}}{{else}}Based on the profile below, please write a compelling professional summary of 2-3 sentences.{{/if}}\n\n# Experience\n{{#each experience}}\n## {{title}} at {{company}}, {{location}}\n**{{startDate}} - {{endDate}}**\n{{{description}}}\n{{/each}}\n\n# Education\n{{#each education}}\n## {{degree}} at {{institution}}, {{location}}\n**{{startDate}} - {{endDate}}**\n{{#if description}}\n{{{description}}}\n{{/if}}\n{{/each}}\n\n# Skills\n{{#if skills}}\n{{#each skills}}\n- {{{this}}}\n{{/each}}\n{{/if}}\n\n{{#if projects}}\n# Projects\n{{#each projects}}\n## {{name}}{{#if projectUrl}} ({{projectUrl}}){{/if}}\n**Technologies:** {{#each technologies}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}\n{{{description}}}\n{{/each}}\n{{/if}}`,
+  prompt: `You are an expert resume writer. Your task is to generate a professional, modern, and premium-looking resume in Markdown format based on the provided user profile data.\n\nFollow these guidelines:\n1.  **Structure**: The resume should include the following sections in order:\n    *   Contact Information (Name, Email, Phone, LinkedIn, GitHub, Portfolio)\n    *   Summary/Objective\n    *   Experience\n    *   Education\n    *   Skills (Categorize if appropriate, e.g., Programming Languages, Frameworks, Tools)\n    *   Projects (Optional, if provided)\n2.  **Content**:\n    *   For Experience, Education, and Projects, the 'description' fields have been pre-summarized. Use them as provided.\n    *   If the user has not provided a summary, create a compelling one (2-3 sentences) based on their experience and skills.\n    *   Ensure consistent formatting and use strong action verbs.\n3.  **Formatting**:\n    *   Use Markdown headers (e.g., #, ##, ###) for sections.\n    *   Use bullet points for descriptions.\n\nHere is the user's profile data:\n\n# Personal Information\nName: {{{personalInfo.name}}}\nEmail: {{{personalInfo.email}}}{{#if personalInfo.phone}}\nPhone: {{{personalInfo.phone}}}{{/if}}{{#if personalInfo.linkedin}}\nLinkedIn: {{{personalInfo.linkedin}}}{{/if}}{{#if personalInfo.github}}\nGitHub: {{{personalInfo.github}}}{{/if}}{{#if personalInfo.portfolioUrl}}\nPortfolio: {{{personalInfo.portfolioUrl}}}{{/if}}\n\n# Summary\n{{#if summary}}{{{summary}}}{{else}}Based on the profile below, please write a compelling professional summary of 2-3 sentences.{{/if}}\n\n# Experience\n{{#each experience}}\n## {{title}} at {{company}}, {{location}}\n**{{startDate}} - {{endDate}}**\n{{{description}}}\n{{/each}}\n\n# Education\n{{#each education}}\n## {{degree}} at {{institution}}, {{location}}\n**{{startDate}} - {{endDate}}**\n{{#if description}}\n{{{description}}}\n{{/if}}\n{{/each}}\n\n# Skills\n{{#if skills}}\n{{#each skills}}\n- {{{name}}}\n{{/each}}\n{{/if}}\n\n{{#if projects}}\n# Projects\n{{#each projects}}\n## {{name}}{{#if projectUrl}} ({{projectUrl}}){{/if}}\n**Technologies:** {{#each technologies}}{{{name}}}{{#unless @last}}, {{/unless}}{{/each}}\n{{{description}}}\n{{/each}}\n{{/if}}`,
 });
 
 

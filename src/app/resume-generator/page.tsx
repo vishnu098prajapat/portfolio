@@ -1,18 +1,24 @@
 import { profileData } from '@/lib/profile-data';
 import { ResumeForm } from './resume-form';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { FileText } from 'lucide-react';
 
 export default function ResumeGeneratorPage() {
-  // Map profileData to the format expected by the form
+  // Map profileData to the format expected by the form (handling object arrays)
   const defaultValues = {
     ...profileData,
-    skills: profileData.skills.map(s => s.name),
+    personalInfo: {
+        ...profileData.personalInfo,
+        linkedin: profileData.personalInfo.linkedin === '#' ? '' : profileData.personalInfo.linkedin,
+        github: profileData.personalInfo.github === '#' ? '' : profileData.personalInfo.github,
+        portfolioUrl: profileData.personalInfo.portfolioUrl === '#' ? '' : profileData.personalInfo.portfolioUrl,
+    },
+    skills: profileData.skills.map(s => ({ name: s.name })),
     projects: profileData.projects.map(p => ({
         name: p.name,
         description: p.description,
         technologies: p.technologies,
-        projectUrl: p.projectUrl || undefined
+        projectUrl: (p.projectUrl === '#' || !p.projectUrl) ? '' : p.projectUrl
     }))
   };
 
@@ -22,15 +28,15 @@ export default function ResumeGeneratorPage() {
         <div className="bg-primary/10 text-primary rounded-full p-3 mb-4">
             <FileText className="w-8 h-8" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary">AI Resume Generator</h1>
-        <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+        <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary text-balance">AI Resume Generator</h1>
+        <p className="mt-4 max-w-2xl text-lg text-muted-foreground text-balance">
           Fill in or adjust your details below, and let our AI craft a professional, tailored resume for you in seconds.
         </p>
       </div>
       
-      <Card>
+      <Card className="border-border/40 shadow-xl">
         <CardContent className="p-4 sm:p-6 md:p-8">
-            <ResumeForm defaultValues={defaultValues} />
+            <ResumeForm defaultValues={defaultValues as any} />
         </CardContent>
       </Card>
     </div>

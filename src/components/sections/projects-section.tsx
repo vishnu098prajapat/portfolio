@@ -55,7 +55,7 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-12 sm:py-20 bg-background">
+    <section id="projects" ref={sectionRef} className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 ref={titleRef} className="text-3xl sm:text-4xl font-bold text-center mb-10 sm:mb-16 font-headline">
             <span className="regular-text">Featured </span>
@@ -68,30 +68,30 @@ export default function ProjectsSection() {
         >
           {profileData.projects.map((project, index) => (
             <div key={index} className="project-card flex flex-col h-full">
-              <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-xl bg-card border border-border/40 group">
-                <div className="relative w-full overflow-hidden aspect-video">
+              <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 rounded-xl bg-card border border-border/40 group">
+                <div className="relative w-full overflow-hidden aspect-[16/10]">
                   <Image
                     src={project.imageUrl}
                     alt={project.name}
                     width={500}
-                    height={281}
+                    height={312}
                     className="object-cover transition-transform duration-500 group-hover:scale-105 h-full w-full"
                   />
                 </div>
                 
                 <CardHeader className="p-3 pb-1">
-                  <CardTitle className="text-sm font-bold text-foreground font-headline group-hover:text-primary transition-colors line-clamp-1">
+                  <CardTitle className="text-xs sm:text-sm font-bold text-foreground font-headline group-hover:text-primary transition-colors line-clamp-1">
                     {project.name}
                   </CardTitle>
                 </CardHeader>
 
                 <CardContent className="p-3 pt-0 flex-grow">
-                  <CardDescription className="text-muted-foreground text-[11px] sm:text-xs leading-tight mb-2 line-clamp-2">
+                  <CardDescription className="text-muted-foreground text-[10px] sm:text-xs leading-tight mb-2 line-clamp-2">
                     {project.description}
                   </CardDescription>
                   <div className="flex flex-wrap gap-1">
                     {project.technologies.slice(0, 3).map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-primary/5 text-primary border-none text-[9px] sm:text-[10px] px-2 py-0.5 rounded-md">
+                      <Badge key={tag} variant="secondary" className="bg-primary/5 text-primary border-none text-[8px] sm:text-[9px] px-2 py-0.5 rounded-md">
                         {tag}
                       </Badge>
                     ))}
@@ -101,19 +101,19 @@ export default function ProjectsSection() {
                 <CardFooter className="p-3 pt-0 mt-auto border-t border-border/5">
                   <div className="flex justify-between w-full items-center pt-2">
                     {project.projectUrl && project.projectUrl !== '#' ? (
-                      <Button variant="link" size="sm" asChild className="p-0 h-auto text-[10px] sm:text-xs text-primary hover:text-primary/80 font-bold">
+                      <Button variant="link" size="sm" asChild className="p-0 h-auto text-[9px] sm:text-[10px] text-primary hover:text-primary/80 font-bold">
                         <Link href={project.projectUrl} target="_blank" rel="noopener noreferrer">
                           Live <ExternalLink className="ml-1 h-3 w-3" />
                         </Link>
                       </Button>
                     ) : (
-                      <span className="text-[10px] text-muted-foreground font-medium italic">Case Study</span>
+                      <span className="text-[9px] text-muted-foreground font-medium italic">Case Study</span>
                     )}
 
                     {project.githubUrl && project.githubUrl !== '#' && (
-                      <Button variant="ghost" size="icon" asChild className="h-7 w-7 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/5">
+                      <Button variant="ghost" size="icon" asChild className="h-6 w-6 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/5">
                           <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                            <Github className="h-3.5 w-3.5" />
+                            <Github className="h-3 w-3" />
                           </Link>
                       </Button>
                     )}

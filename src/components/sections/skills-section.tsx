@@ -71,7 +71,7 @@ export default function SkillsSection() {
           <span className="regular-text">Technical </span>
           <span className="text-primary">Skills</span>
         </h2>
-        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-4 max-w-6xl mx-auto">
+        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-4 max-w-6xl mx-auto">
           {profileData.skills.map((skill) => {
             const meta = skillMeta[skill.name] || { icon: CodeSquare, color: 'text-primary' };
             const Icon = meta.icon;

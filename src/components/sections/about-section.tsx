@@ -50,12 +50,12 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Image Column */}
             <div className="relative flex justify-center gsap-about-item">
-              <div className="relative w-full max-w-[320px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-background group bg-background transition-transform duration-500 hover:scale-[1.02]">
+              <div className="relative w-full max-w-[340px] aspect-square rounded-2xl overflow-hidden shadow-2xl border-2 border-white group bg-background transition-transform duration-500 hover:scale-[1.02]">
                 <Image
                   src={profileData.personalInfo.aboutAvatar || profileData.personalInfo.avatar}
                   alt="About Vishnu"
                   fill
-                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
             </div>
@@ -72,22 +72,22 @@ export default function AboutSection() {
               </p>
               
               <div className="grid grid-cols-2 gap-4">
-                <Card className="bg-background border border-border/50 shadow-sm rounded-2xl overflow-hidden group hover:shadow-md transition-all">
+                <Card className="bg-background border border-border/50 shadow-sm rounded-xl overflow-hidden group hover:shadow-md transition-all">
                   <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-                    <p className="text-2xl font-bold text-primary mb-1">10+</p>
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Projects Done</p>
+                    <p className="text-xl font-bold text-primary mb-1">Full Stack</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Expertise</p>
                   </CardContent>
                 </Card>
-                <Card className="bg-background border border-border/50 shadow-sm rounded-2xl overflow-hidden group hover:shadow-md transition-all">
+                <Card className="bg-background border border-border/50 shadow-sm rounded-xl overflow-hidden group hover:shadow-md transition-all">
                   <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-                    <p className="text-2xl font-bold text-primary mb-1">Full Stack</p>
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Expertise</p>
+                    <p className="text-xl font-bold text-primary mb-1">AI-Powered</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Solutions</p>
                   </CardContent>
                 </Card>
               </div>
 
               <div className="pt-6">
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 rounded-xl px-10 shadow-xl transition-all hover:-translate-y-1">
+                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 rounded-lg px-8 shadow-lg transition-all hover:-translate-y-1">
                   <a href={profileData.personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer">
                     Download CV <Download className="ml-2 h-4 w-4" />
                   </a>

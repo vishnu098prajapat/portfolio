@@ -1,11 +1,10 @@
 "use client";
 
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { Download, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import Image from 'next/image';
 import { profileData } from '@/lib/profile-data';
 
@@ -84,14 +83,6 @@ export default function AboutSection() {
                     <p className="text-[9px] text-muted-foreground uppercase tracking-wider font-bold">Solutions</p>
                   </CardContent>
                 </Card>
-              </div>
-
-              <div className="pt-4">
-                <Button asChild size="default" className="bg-primary hover:bg-primary/90 rounded-md px-6 shadow-md transition-all hover:-translate-y-0.5">
-                  <a href={profileData.personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer">
-                    Download CV <Download className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 import type { ProfileData } from './types';
 
 export const profileData: ProfileData = {

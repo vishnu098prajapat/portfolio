@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -63,11 +64,11 @@ export default function ProjectsSection() {
         
         <div 
           ref={projectsGridRef} 
-          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-5xl mx-auto"
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-6xl mx-auto"
         >
           {profileData.projects.map((project, index) => (
             <div key={index} className="project-card flex flex-col h-full">
-              <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 rounded-lg bg-card border border-border/30 group">
+              <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-xl bg-card border border-border/40 group">
                 <div className="relative w-full overflow-hidden aspect-video">
                   <Image
                     src={project.imageUrl}
@@ -85,12 +86,12 @@ export default function ProjectsSection() {
                 </CardHeader>
 
                 <CardContent className="p-3 pt-0 flex-grow">
-                  <CardDescription className="text-muted-foreground text-[10px] sm:text-xs leading-tight mb-2 line-clamp-2">
+                  <CardDescription className="text-muted-foreground text-[11px] sm:text-xs leading-tight mb-2 line-clamp-2">
                     {project.description}
                   </CardDescription>
                   <div className="flex flex-wrap gap-1">
                     {project.technologies.slice(0, 3).map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-primary/5 text-primary border-none text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-md">
+                      <Badge key={tag} variant="secondary" className="bg-primary/5 text-primary border-none text-[9px] sm:text-[10px] px-2 py-0.5 rounded-md">
                         {tag}
                       </Badge>
                     ))}
@@ -102,7 +103,7 @@ export default function ProjectsSection() {
                     {project.projectUrl && project.projectUrl !== '#' ? (
                       <Button variant="link" size="sm" asChild className="p-0 h-auto text-[10px] sm:text-xs text-primary hover:text-primary/80 font-bold">
                         <Link href={project.projectUrl} target="_blank" rel="noopener noreferrer">
-                          Live <ExternalLink className="ml-1 h-2.5 w-2.5 sm:h-3 sm:w-3" />
+                          Live <ExternalLink className="ml-1 h-3 w-3" />
                         </Link>
                       </Button>
                     ) : (
@@ -110,9 +111,9 @@ export default function ProjectsSection() {
                     )}
 
                     {project.githubUrl && project.githubUrl !== '#' && (
-                      <Button variant="ghost" size="icon" asChild className="h-6 w-6 sm:h-7 sm:w-7 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/5">
+                      <Button variant="ghost" size="icon" asChild className="h-7 w-7 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/5">
                           <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                            <Github className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                            <Github className="h-3.5 w-3.5" />
                           </Link>
                       </Button>
                     )}

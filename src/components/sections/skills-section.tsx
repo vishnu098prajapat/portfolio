@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useRef } from 'react';
@@ -71,15 +72,15 @@ export default function SkillsSection() {
           <span className="regular-text">Technical </span>
           <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Expertise</span>
         </h2>
-        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 sm:gap-6 max-w-5xl mx-auto">
+        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-4 max-w-5xl mx-auto">
           {profileData.skills.map((skill) => {
             const meta = skillMeta[skill.name] || { icon: CodeSquare, color: 'text-primary' };
             const Icon = meta.icon;
             return (
               <div key={skill.name} className="skill-card-item group">
-                <div className="flex flex-col items-center justify-center p-3 sm:p-5 bg-card/80 backdrop-blur-md border border-border/40 rounded-2xl shadow-sm h-full transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-xl hover:border-primary/50">
-                  <Icon className={cn("h-7 w-7 sm:h-10 sm:w-10 mb-2 sm:mb-3 transition-transform duration-500 group-hover:rotate-6", meta.color)} />
-                  <p className="text-[10px] sm:text-sm font-semibold text-center text-card-foreground line-clamp-1">{skill.name}</p>
+                <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-card/80 backdrop-blur-md border border-border/40 rounded-xl shadow-sm h-full transition-all duration-300 transform-gpu hover:-translate-y-1 hover:shadow-lg hover:border-primary/50">
+                  <Icon className={cn("h-6 w-6 sm:h-8 sm:w-8 mb-1.5 sm:mb-2 transition-transform duration-500 group-hover:rotate-6", meta.color)} />
+                  <p className="text-[9px] sm:text-xs font-semibold text-center text-card-foreground line-clamp-1">{skill.name}</p>
                 </div>
               </div>
             );

@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -37,41 +38,43 @@ export default function HomeSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           
           <div className="text-center md:text-left order-2 md:order-1">
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground mb-1 font-headline leading-tight gsap-hero-text">
+            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-foreground mb-2 font-headline leading-tight gsap-hero-text">
               {profileData.personalInfo.name.split(' ')[0]} <br />
               {profileData.personalInfo.name.split(' ')[1]}
             </h1>
-            <p className="text-lg sm:text-xl text-foreground/90 mb-3 gsap-hero-text">
+            <p className="text-xl sm:text-2xl text-foreground/90 mb-4 gsap-hero-text">
               I am an <span className="text-primary font-bold">{profileData.personalInfo.title}</span>
             </p>
-            <p className="text-muted-foreground mb-6 max-w-sm mx-auto md:mx-0 gsap-hero-text text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground mb-8 max-w-md mx-auto md:mx-0 gsap-hero-text text-base sm:text-lg leading-relaxed">
               {profileData.summary}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start gsap-hero-text">
-              <Button size="sm" asChild className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6 h-10 text-sm font-semibold">
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start gsap-hero-text">
+              <Button size="lg" asChild className="bg-[#333] text-white hover:bg-[#444] rounded-full px-8 h-12 text-base font-semibold shadow-xl">
                 <Link href="#contact">
-                  Hire Me <MessageCircle className="ml-2 h-4 w-4" />
+                  Hire Me <MessageCircle className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="sm" variant="outline" asChild className="border-border/60 hover:bg-muted/50 rounded-full px-6 h-10 text-sm">
+              <Button size="lg" variant="outline" asChild className="bg-[#f0f0f5] border-transparent hover:bg-muted/80 rounded-full px-8 h-12 text-base font-semibold shadow-md">
                 <Link href="#projects">
-                  Explore Work <ArrowRight className="ml-2 h-4 w-4" />
+                  Explore Work <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             </div>
           </div>
 
           <div className="relative flex items-center justify-center order-1 md:order-2">
-            <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-[320px] lg:h-[320px] gsap-hero-image-wrapper">
-                <div className="absolute inset-0 rounded-full bg-white opacity-5 blur-[40px] scale-110" />
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px] gsap-hero-image-wrapper">
+                {/* Smokey outer glow */}
+                <div className="absolute inset-0 rounded-full bg-white opacity-20 blur-[60px] scale-110" />
                 
-                <div className="relative w-full h-full p-1 rounded-full border-[4px] border-white/95 shadow-lg bg-background">
+                {/* Image Container with Thick White Border */}
+                <div className="relative w-full h-full p-2 rounded-full border-[10px] border-white shadow-2xl bg-white overflow-hidden">
                     <div className="w-full h-full rounded-full overflow-hidden bg-muted">
                         <Image
                             src={profileData.personalInfo.avatar}
                             alt={profileData.personalInfo.name}
-                            width={400}
-                            height={400}
+                            width={600}
+                            height={600}
                             className="object-cover w-full h-full object-top"
                             priority
                         />

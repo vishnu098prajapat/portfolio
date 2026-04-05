@@ -74,7 +74,7 @@ export const profileData: ProfileData = {
       name: "Online Gaming Platform",
       description: "A modern online gaming platform featuring a responsive interface and real-time state management.",
       technologies: ["Vite", "React"],
-      imageUrl: "/images/online-game.jpeg",
+      imageUrl: "/images/gam.png",
       imageHint: 'online gaming',
       projectUrl: "http://realonlinegaming.netlify.app",
       githubUrl: "#",

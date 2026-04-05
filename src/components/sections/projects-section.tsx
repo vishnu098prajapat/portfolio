@@ -68,12 +68,12 @@ export default function ProjectsSection() {
           {profileData.projects.map((project, index) => (
             <div key={index} className="project-card flex flex-col h-full">
               <Card className="flex flex-col h-full overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 rounded-lg bg-card border border-border/30 group">
-                <div className="relative w-full overflow-hidden aspect-[4/3]">
+                <div className="relative w-full overflow-hidden aspect-video">
                   <Image
                     src={project.imageUrl}
                     alt={project.name}
                     width={500}
-                    height={375}
+                    height={281}
                     className="object-cover transition-transform duration-500 group-hover:scale-105 h-full w-full"
                   />
                 </div>

@@ -13,7 +13,6 @@ export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Register GSAP plugin inside useEffect to avoid SSR errors
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {

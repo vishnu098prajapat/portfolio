@@ -71,7 +71,7 @@ export default function SkillsSection() {
         <h2 ref={titleRef} className="text-3xl sm:text-4xl font-bold text-center mb-10 sm:mb-16 font-headline">
           <span className="text-primary">Skills</span>
         </h2>
-        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-4 max-w-6xl mx-auto">
+        <div ref={gridRef} className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-4 max-w-7xl mx-auto">
           {profileData.skills.map((skill) => {
             const meta = skillMeta[skill.name] || { icon: Code, color: 'text-primary' };
             const Icon = meta.icon;

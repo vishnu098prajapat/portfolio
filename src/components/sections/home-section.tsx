@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { MousePointer2 } from 'lucide-react';
 import { profileData } from '@/lib/profile-data';
 
 export default function HomeSection() {
@@ -17,7 +16,6 @@ export default function HomeSection() {
   const [isLoaded, setIsLoaded] = useState(false);
   const frameCount = 192;
 
-  // Preload images for the sequence
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
@@ -25,7 +23,6 @@ export default function HomeSection() {
     const preloadImages = () => {
       for (let i = 1; i <= frameCount; i++) {
         const img = new Image();
-        // File naming format: ezgif-frame-001.png
         img.src = `/images/hero_sequence/ezgif-frame-${i.toString().padStart(3, '0')}.png`;
         img.onload = () => {
           loadedCount++;
@@ -36,8 +33,8 @@ export default function HomeSection() {
           }
         };
         img.onerror = () => {
-          console.error(`Failed to load frame ${i}`);
-          loadedCount++; // Avoid getting stuck
+          loadedCount++;
+          if (loadedCount === frameCount) setIsLoaded(true);
         };
         loadedImages.push(img);
       }
@@ -47,14 +44,13 @@ export default function HomeSection() {
   }, []);
 
   useEffect(() => {
-    if (!isLoaded || !canvasRef.current || images.length < frameCount) return;
+    if (!isLoaded || !canvasRef.current || images.length === 0) return;
 
     gsap.registerPlugin(ScrollTrigger);
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    // Helper to render a specific frame onto the canvas
     const renderFrame = (index: number) => {
       const img = images[index - 1];
       if (!img || !context) return;
@@ -63,7 +59,6 @@ export default function HomeSection() {
       const imgRatio = img.width / img.height;
       let drawWidth, drawHeight, offsetX, offsetY;
 
-      // Object-fit: cover implementation for canvas
       if (canvasRatio > imgRatio) {
         drawWidth = canvas.width;
         drawHeight = canvas.width / imgRatio;
@@ -80,7 +75,6 @@ export default function HomeSection() {
       context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
 
-    // Responsive Canvas
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -96,14 +90,13 @@ export default function HomeSection() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=600%", // Length of scroll to finish sequence
-        scrub: 1, // Smooth scrub
+        end: "+=500%",
+        scrub: 1.5,
         pin: true,
         anticipatePin: 1,
       },
     });
 
-    // Frame Sequence Animation
     tl.to(sequenceState, {
       frame: frameCount,
       snap: "frame",
@@ -112,33 +105,32 @@ export default function HomeSection() {
       onUpdate: () => renderFrame(Math.round(sequenceState.frame)),
     });
 
-    // Coordination with text elements
-    // State 1: Fade out initial text
+    // Phase 1 transitions
     tl.to(".hero-text-1", {
       opacity: 0,
-      y: -100,
-      filter: "blur(20px)",
-      duration: 0.1
+      x: -50,
+      filter: "blur(12px)",
+      duration: 0.15
     }, 0.05);
 
-    // State 2: Fade in and out mid text
+    // Phase 2 transitions
     tl.fromTo(".hero-text-2", 
-      { opacity: 0, y: 100, filter: "blur(20px)" }, 
-      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.2 }, 
-      0.2
+      { opacity: 0, x: 50, filter: "blur(12px)" }, 
+      { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.25 }, 
+      0.25
     );
     tl.to(".hero-text-2", {
       opacity: 0,
-      y: -100,
-      filter: "blur(20px)",
-      duration: 0.2
-    }, 0.5);
+      x: -50,
+      filter: "blur(12px)",
+      duration: 0.25
+    }, 0.55);
 
-    // State 3: Final CTA
+    // Phase 3 transitions
     tl.fromTo(".hero-text-3", 
-      { opacity: 0, scale: 0.8, filter: "blur(20px)" }, 
-      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2 }, 
-      0.7
+      { opacity: 0, scale: 0.95, filter: "blur(12px)" }, 
+      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.25 }, 
+      0.75
     );
 
     return () => {
@@ -149,65 +141,61 @@ export default function HomeSection() {
 
   return (
     <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-background">
-      {/* Preloader Overlay */}
       {!isLoaded && (
         <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background">
-          <div className="w-64 h-1 bg-muted rounded-full overflow-hidden">
+          <div className="w-48 h-[2px] bg-muted rounded-full overflow-hidden">
             <div 
               className="h-full bg-primary transition-all duration-300" 
               style={{ width: `${loadingProgress}%` }}
             />
           </div>
-          <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
-            Experience Loading {loadingProgress}%
+          <p className="mt-4 text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60">
+            LOADING EXPERIENCE {loadingProgress}%
           </p>
         </div>
       )}
 
-      {/* Animation Canvas */}
       <canvas 
         ref={canvasRef} 
         className="fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none"
       />
 
-      {/* Content Layer */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 w-full h-full">
+      <div className="relative z-10 flex flex-col items-start justify-center min-h-screen px-8 sm:px-16 lg:px-24 w-full h-full max-w-7xl mx-auto">
         
-        {/* Phase 1: Intro */}
-        <div className="hero-text-1 flex flex-col items-center space-y-6 max-w-6xl w-full">
-          <h1 className="text-6xl sm:text-8xl lg:text-[11rem] font-black font-headline tracking-tighter leading-none text-foreground mix-blend-difference uppercase">
+        {/* Phase 1: Intro - Moved Left, Smaller */}
+        <div className="hero-text-1 flex flex-col items-start space-y-4 max-w-2xl">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black font-headline tracking-tighter leading-[0.9] text-foreground mix-blend-difference uppercase">
             {profileData.personalInfo.name.split(' ')[0]} <br/>
             <span className="text-primary">{profileData.personalInfo.name.split(' ')[1]}</span>
           </h1>
-          <p className="text-xl sm:text-3xl font-bold text-foreground mix-blend-difference uppercase tracking-[0.5em]">
+          <p className="text-base sm:text-xl font-bold text-foreground/80 mix-blend-difference uppercase tracking-[0.3em]">
             {profileData.personalInfo.title}
           </p>
-          <div className="pt-20 flex flex-col items-center">
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-muted-foreground animate-pulse">Start Scrolling</span>
-            <div className="w-px h-24 bg-gradient-to-b from-primary to-transparent" />
+          <div className="pt-12">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground animate-pulse">Scroll Down</span>
           </div>
         </div>
 
-        {/* Phase 2: Statement */}
-        <div className="hero-text-2 absolute flex flex-col items-center space-y-6 opacity-0 pointer-events-none px-6">
-          <h2 className="text-4xl sm:text-7xl font-bold font-headline text-foreground mix-blend-difference leading-tight text-balance">
-             Redefining <span className="text-primary italic">Digital Craftsmanship</span>
+        {/* Phase 2: Statement - Moved Left, Smaller */}
+        <div className="hero-text-2 absolute flex flex-col items-start space-y-4 opacity-0 pointer-events-none max-w-xl">
+          <h2 className="text-3xl sm:text-5xl font-bold font-headline text-foreground mix-blend-difference leading-tight">
+             Redefining <br/><span className="text-primary italic">Digital Craftsmanship</span>
           </h2>
-          <p className="max-w-3xl text-lg sm:text-2xl text-muted-foreground font-medium mix-blend-difference leading-relaxed">
+          <p className="text-sm sm:text-lg text-muted-foreground font-medium mix-blend-difference leading-relaxed">
             {profileData.summary}
           </p>
         </div>
 
-        {/* Phase 3: Connect */}
-        <div className="hero-text-3 absolute flex flex-col items-center space-y-10 opacity-0 pointer-events-none px-6">
-          <h2 className="text-6xl sm:text-9xl font-black font-headline text-foreground mix-blend-difference tracking-tighter">
+        {/* Phase 3: Connect - Moved Left, Smaller Buttons */}
+        <div className="hero-text-3 absolute flex flex-col items-start space-y-8 opacity-0 pointer-events-none max-w-2xl">
+          <h2 className="text-5xl sm:text-7xl font-black font-headline text-foreground mix-blend-difference tracking-tighter uppercase">
             LET&apos;S <span className="text-primary">TALK</span>
           </h2>
-          <div className="flex flex-wrap gap-4 justify-center scale-110 sm:scale-125">
-            <Button size="lg" asChild className="rounded-full px-14 h-16 text-lg font-bold shadow-[0_20px_50px_rgba(138,43,226,0.3)] bg-primary hover:bg-primary/90">
+          <div className="flex flex-wrap gap-3">
+            <Button size="sm" asChild className="rounded-full px-8 h-11 text-sm font-bold shadow-lg bg-primary hover:bg-primary/90">
               <Link href="#contact">Get in Touch</Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="rounded-full px-14 h-16 text-lg font-bold backdrop-blur-2xl bg-white/5 border-primary/40 text-foreground hover:bg-primary/20">
+            <Button size="sm" variant="outline" asChild className="rounded-full px-8 h-11 text-sm font-bold backdrop-blur-md bg-white/5 border-primary/20 text-foreground hover:bg-primary/10">
               <Link href="#projects">Browse Work</Link>
             </Button>
           </div>

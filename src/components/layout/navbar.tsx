@@ -2,33 +2,18 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { Menu } from 'lucide-react';
+import { useState } from 'react';
+import { Menu, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { cn } from '@/lib/utils';
+import { profileData } from '@/lib/profile-data';
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <header
-      className={cn(
-        'fixed top-0 z-50 w-full transition-all duration-300',
-        isScrolled ? 'bg-background/20 backdrop-blur-sm h-12 border-b border-white/5' : 'bg-transparent h-14'
-      )}
-    >
-      <div className="container mx-auto px-6 h-full">
+    <header className="fixed top-0 z-50 w-full h-16 bg-transparent pointer-events-none">
+      <div className="container mx-auto px-6 h-full pointer-events-auto">
         <div className="flex items-center justify-between h-full">
           <Link href="#home" className="flex items-center gap-2 group">
             <svg
@@ -53,14 +38,24 @@ export default function Navbar() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="text-base font-bold text-foreground font-headline tracking-tighter">VISHNU</span>
+            <span className="text-base font-bold text-white font-headline tracking-tighter mix-blend-difference">VISHNU</span>
           </Link>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {/* Social Icons in Navbar */}
+            <div className="hidden sm:flex items-center gap-1 mr-2">
+              <Button variant="ghost" size="icon" asChild className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10 rounded-full">
+                <Link href={profileData.personalInfo.github} target="_blank"><Github className="h-4 w-4" /></Link>
+              </Button>
+              <Button variant="ghost" size="icon" asChild className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10 rounded-full">
+                <Link href={profileData.personalInfo.linkedin} target="_blank"><Linkedin className="h-4 w-4" /></Link>
+              </Button>
+            </div>
+
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="hover:bg-white/5 rounded-full h-8 w-8">
-                  <Menu className="h-4 w-4 text-foreground" />
+                <Button variant="ghost" size="icon" className="hover:bg-white/10 rounded-full h-8 w-8">
+                  <Menu className="h-4 w-4 text-white" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>

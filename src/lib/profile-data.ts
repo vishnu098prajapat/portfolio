@@ -12,7 +12,7 @@ export const profileData: ProfileData = {
     linkedin: "https://www.linkedin.com/in/vishnu-prajapat-a7b240293/",
     github: "https://github.com/vishnu098prajapat",
     portfolioUrl: "https://vishnu-portfolio.vercel.app",
-    resumeUrl: "#", 
+    resumeUrl: "#",
   },
   summary:
     "Full Stack Web Developer with AI hands-on experience in designing and developing modern web applications using React, Node.js, and Firebase.",
@@ -70,7 +70,7 @@ export const profileData: ProfileData = {
       technologies: [{ name: "React" }, { name: "Utility" }, { name: "Tools" }],
       imageUrl: "/images/image_pdf_tool.png",
       imageHint: 'pdf utility tool',
-      projectUrl: "https://studio--studio-7834146289-df62e.us-central1.hosted.app/",
+      projectUrl: "https://ilovetools-iota.vercel.app/",
       githubUrl: "#",
     },
     {

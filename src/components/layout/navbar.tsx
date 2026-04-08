@@ -12,13 +12,13 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 z-50 w-full h-16 bg-transparent pointer-events-none">
+    <header className="fixed top-0 z-50 w-full h-14 bg-transparent pointer-events-none">
       <div className="container mx-auto px-6 h-full pointer-events-auto">
         <div className="flex items-center justify-between h-full">
-          <Link href="#home" className="flex items-center gap-2 group">
+          <Link href="#home" className="flex items-center gap-1.5 group">
             <svg
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               viewBox="0 0 32 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -38,28 +38,28 @@ export default function Navbar() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="text-base font-bold text-white font-headline tracking-tighter mix-blend-difference">VISHNU</span>
+            <span className="text-sm font-black text-white font-headline tracking-tighter mix-blend-difference uppercase">VISHNU</span>
           </Link>
 
-          <div className="flex items-center gap-2">
-            {/* Social Icons in Navbar */}
-            <div className="hidden sm:flex items-center gap-1 mr-2">
-              <Button variant="ghost" size="icon" asChild className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10 rounded-full">
-                <Link href={profileData.personalInfo.github} target="_blank"><Github className="h-4 w-4" /></Link>
+          <div className="flex items-center gap-1.5">
+            {/* Social Icons always visible next to menu */}
+            <div className="flex items-center gap-0.5">
+              <Button variant="ghost" size="icon" asChild className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/10 rounded-full">
+                <Link href={profileData.personalInfo.github} target="_blank"><Github className="h-3.5 w-3.5" /></Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10 rounded-full">
-                <Link href={profileData.personalInfo.linkedin} target="_blank"><Linkedin className="h-4 w-4" /></Link>
+              <Button variant="ghost" size="icon" asChild className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/10 rounded-full">
+                <Link href={profileData.personalInfo.linkedin} target="_blank"><Linkedin className="h-3.5 w-3.5" /></Link>
               </Button>
             </div>
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="hover:bg-white/10 rounded-full h-8 w-8">
-                  <Menu className="h-4 w-4 text-white" />
+                <Button variant="ghost" size="icon" className="hover:bg-white/10 rounded-full h-7 w-7">
+                  <Menu className="h-3.5 w-3.5 text-white" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[260px] bg-background/95 backdrop-blur-2xl border-l border-white/10 p-6">
+              <SheetContent side="right" className="w-[240px] bg-background/95 backdrop-blur-2xl border-l border-white/10 p-6">
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                 <div className="flex flex-col space-y-6 pt-10">
                     <nav className="flex flex-col space-y-1">
@@ -67,7 +67,7 @@ export default function Navbar() {
                         <Link
                           key={item}
                           href={`#${item.toLowerCase()}`}
-                          className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-white/5"
+                          className="text-xs font-bold text-foreground/70 hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-white/5 uppercase tracking-widest"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {item}

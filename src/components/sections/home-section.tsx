@@ -105,30 +105,30 @@ export default function HomeSection() {
       onUpdate: () => renderFrame(Math.round(sequenceState.frame)),
     });
 
-    // Phase 1 (Initial Name)
+    // Phase 1 (Intro)
     tl.to(".hero-text-1", {
       opacity: 0,
-      x: -100,
-      filter: "blur(15px)",
+      x: -50,
+      filter: "blur(10px)",
       duration: 0.15
     }, 0.05);
 
     // Phase 2 (Statement)
     tl.fromTo(".hero-text-2", 
-      { opacity: 0, x: 50, filter: "blur(15px)" }, 
+      { opacity: 0, x: 50, filter: "blur(10px)" }, 
       { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.25 }, 
       0.25
     );
     tl.to(".hero-text-2", {
       opacity: 0,
       x: -50,
-      filter: "blur(15px)",
+      filter: "blur(10px)",
       duration: 0.25
     }, 0.55);
 
     // Phase 3 (Final CTA)
     tl.fromTo(".hero-text-3", 
-      { opacity: 0, y: 30, scale: 0.95, filter: "blur(15px)" }, 
+      { opacity: 0, y: 20, scale: 0.98, filter: "blur(10px)" }, 
       { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.25 }, 
       0.75
     );
@@ -139,24 +139,49 @@ export default function HomeSection() {
     };
   }, [isLoaded, images]);
 
-  const loadingStatus = loadingProgress < 30 ? "Initializing" : loadingProgress < 70 ? "Loading Assets" : "Finalizing Experience";
-
   return (
     <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black">
       {!isLoaded && (
         <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black">
-          <div className="relative w-64">
-            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse" />
-            <div className="relative h-1 w-full bg-white/5 rounded-full overflow-hidden">
+          {/* Coffee Cup Animation */}
+          <div className="relative mb-8">
+            <svg 
+              width="64" 
+              height="64" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              className="text-primary animate-bounce"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M17 8C19.2091 8 21 9.79086 21 12C21 14.2091 19.2091 16 17 16H16V17C16 19.2091 14.2091 21 12 21H6C3.79086 21 2 19.2091 2 17V12C2 9.79086 3.79086 8 6 8H17Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6 2V5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse origin-bottom" style={{ animationDelay: '0.1s' }} />
+              <path d="M10 2V5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse origin-bottom" style={{ animationDelay: '0.3s' }} />
+              <path d="M14 2V5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse origin-bottom" style={{ animationDelay: '0.5s' }} />
+            </svg>
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary/20 rounded-full blur-sm" />
+          </div>
+
+          <div className="flex flex-col items-center gap-4 text-center px-6">
+            <h2 className="text-xl font-bold text-white font-headline tracking-tight uppercase">
+              COFFEE IS READY
+            </h2>
+            <p className="text-[10px] font-bold text-primary tracking-[0.3em] uppercase animate-pulse">
+              Brewing Your Experience...
+            </p>
+            
+            <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden mt-2">
               <div 
-                className="h-full bg-primary transition-all duration-500 ease-out" 
+                className="h-full bg-primary transition-all duration-300 ease-out" 
                 style={{ width: `${loadingProgress}%` }}
               />
             </div>
-          </div>
-          <div className="mt-8 flex flex-col items-center gap-1">
-            <span className="text-[10px] font-bold text-primary tracking-[0.4em] uppercase">{loadingStatus}</span>
-            <span className="text-4xl font-black text-white font-code tracking-tighter">{loadingProgress}%</span>
+            
+            <span className="text-3xl font-black text-white font-code tracking-tighter">
+              {loadingProgress}%
+            </span>
+            <p className="text-[9px] text-white/30 font-medium max-w-[200px] leading-relaxed">
+              Please wait while we prepare your high-quality portfolio view.
+            </p>
           </div>
         </div>
       )}
@@ -168,40 +193,40 @@ export default function HomeSection() {
 
       <div className="relative z-10 flex flex-col items-start justify-center min-h-screen px-6 sm:px-12 lg:px-24 w-full h-full max-w-7xl mx-auto pointer-events-none">
         
-        {/* Phase 1: Intro - Pushed left and down */}
-        <div className="hero-text-1 flex flex-col items-start space-y-1 max-w-lg mt-32 pointer-events-auto">
-          <h1 className="text-3xl sm:text-5xl font-black font-headline tracking-tighter leading-[0.9] text-white mix-blend-difference uppercase">
+        {/* Phase 1: Intro - Extreme Left */}
+        <div className="hero-text-1 flex flex-col items-start space-y-1 max-w-md mt-32 pointer-events-auto">
+          <h1 className="text-2xl sm:text-4xl font-black font-headline tracking-tighter leading-[1] text-white mix-blend-difference uppercase">
             {profileData.personalInfo.name.split(' ')[0]} <br/>
             <span className="text-primary">{profileData.personalInfo.name.split(' ')[1]}</span>
           </h1>
-          <p className="text-[10px] font-bold text-white/50 mix-blend-difference uppercase tracking-[0.4em]">
+          <p className="text-[8px] sm:text-[9px] font-bold text-white/50 mix-blend-difference uppercase tracking-[0.4em]">
             {profileData.personalInfo.title}
           </p>
-          <div className="pt-16">
-            <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-white/20 animate-bounce">Scroll to Explore</span>
+          <div className="pt-12">
+            <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-white/20 animate-bounce">Scroll Down</span>
           </div>
         </div>
 
-        {/* Phase 2: Statement - Pushed even further left */}
-        <div className="hero-text-2 absolute flex flex-col items-start space-y-2 opacity-0 pointer-events-none max-w-[280px] sm:max-w-xs left-6 sm:left-12 lg:left-24">
-          <h2 className="text-xl sm:text-2xl font-bold font-headline text-white mix-blend-difference leading-tight">
-             REDEFINING <br/><span className="text-primary italic">CRAFTSMANSHIP</span>
+        {/* Phase 2: Statement - Extreme Left */}
+        <div className="hero-text-2 absolute flex flex-col items-start space-y-2 opacity-0 pointer-events-none max-w-[240px] left-6 sm:left-12 lg:left-24">
+          <h2 className="text-lg sm:text-xl font-bold font-headline text-white mix-blend-difference leading-tight uppercase">
+             REDEFINING <br/><span className="text-primary italic">DIGITAL ART</span>
           </h2>
-          <p className="text-[10px] sm:text-xs text-white/40 font-medium mix-blend-difference leading-relaxed">
+          <p className="text-[9px] text-white/40 font-medium mix-blend-difference leading-relaxed">
             {profileData.summary}
           </p>
         </div>
 
-        {/* Phase 3: Connect - Sleek, small, far left */}
-        <div className="hero-text-3 absolute flex flex-col items-start space-y-4 opacity-0 pointer-events-none max-w-lg mt-48 left-6 sm:left-12 lg:left-24">
-          <h2 className="text-3xl sm:text-5xl font-black font-headline text-white mix-blend-difference tracking-tighter uppercase">
+        {/* Phase 3: Final CTA - Extreme Left & Small */}
+        <div className="hero-text-3 absolute flex flex-col items-start space-y-4 opacity-0 pointer-events-none max-w-sm mt-48 left-6 sm:left-12 lg:left-24">
+          <h2 className="text-2xl sm:text-4xl font-black font-headline text-white mix-blend-difference tracking-tighter uppercase">
             LET&apos;S <span className="text-primary">TALK</span>
           </h2>
           <div className="flex gap-2 pointer-events-auto">
-            <Button size="sm" asChild className="rounded-full px-5 h-8 text-[10px] font-bold bg-primary hover:bg-primary/90">
-              <Link href="#contact">Contact Now</Link>
+            <Button size="sm" asChild className="rounded-full px-4 h-7 text-[9px] font-bold bg-primary hover:bg-primary/90">
+              <Link href="#contact">Contact Me</Link>
             </Button>
-            <Button size="sm" variant="outline" asChild className="rounded-full px-5 h-8 text-[10px] font-bold bg-white/5 border-white/10 text-white hover:bg-white/10 backdrop-blur-md">
+            <Button size="sm" variant="outline" asChild className="rounded-full px-4 h-7 text-[9px] font-bold bg-white/5 border-white/10 text-white hover:bg-white/10 backdrop-blur-md">
               <Link href="#projects">My Work</Link>
             </Button>
           </div>

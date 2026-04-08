@@ -91,15 +91,6 @@ export const profileData: ProfileData = {
       projectUrl: "http://realonlinegaming.netlify.app",
       githubUrl: "#",
     },
-    {
-      name: "Watermelon GSAP",
-      description: "A creative landing page showcasing advanced GSAP scroll animations and interactive UI elements.",
-      technologies: [{ name: "GSAP" }, { name: "Animation" }, { name: "UI" }],
-      imageUrl: "/images/w.jpeg",
-      imageHint: 'scroll animation',
-      projectUrl: "https://watermelon-gsap.vercel.app/",
-      githubUrl: "#",
-    },
   ],
   experience: [
     {

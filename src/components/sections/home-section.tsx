@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { profileData } from '@/lib/profile-data';
+import { Github, Linkedin } from 'lucide-react';
 
 export default function HomeSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,8 +91,8 @@ export default function HomeSection() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=500%",
-        scrub: 1.5,
+        end: "+=600%",
+        scrub: 2,
         pin: true,
         anticipatePin: 1,
       },
@@ -105,31 +106,31 @@ export default function HomeSection() {
       onUpdate: () => renderFrame(Math.round(sequenceState.frame)),
     });
 
-    // Phase 1 transitions
+    // Phase 1 (Initial Name)
     tl.to(".hero-text-1", {
       opacity: 0,
-      x: -50,
-      filter: "blur(12px)",
+      x: -100,
+      filter: "blur(15px)",
       duration: 0.15
     }, 0.05);
 
-    // Phase 2 transitions
+    // Phase 2 (Statement)
     tl.fromTo(".hero-text-2", 
-      { opacity: 0, x: 50, filter: "blur(12px)" }, 
+      { opacity: 0, x: 100, filter: "blur(15px)" }, 
       { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.25 }, 
       0.25
     );
     tl.to(".hero-text-2", {
       opacity: 0,
-      x: -50,
-      filter: "blur(12px)",
+      x: -100,
+      filter: "blur(15px)",
       duration: 0.25
     }, 0.55);
 
-    // Phase 3 transitions
+    // Phase 3 (Final CTA)
     tl.fromTo(".hero-text-3", 
-      { opacity: 0, scale: 0.95, filter: "blur(12px)" }, 
-      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.25 }, 
+      { opacity: 0, y: 50, scale: 0.9, filter: "blur(15px)" }, 
+      { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.25 }, 
       0.75
     );
 
@@ -139,64 +140,81 @@ export default function HomeSection() {
     };
   }, [isLoaded, images]);
 
+  const loadingStatus = loadingProgress < 30 ? "Initializing" : loadingProgress < 70 ? "Loading Assets" : "Finalizing Experience";
+
   return (
-    <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-background">
+    <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black">
       {!isLoaded && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background">
-          <div className="w-48 h-[2px] bg-muted rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-primary transition-all duration-300" 
-              style={{ width: `${loadingProgress}%` }}
-            />
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black">
+          <div className="relative w-64">
+            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full animate-pulse" />
+            <div className="relative h-1 w-full bg-white/5 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-primary transition-all duration-500 ease-out" 
+                style={{ width: `${loadingProgress}%` }}
+              />
+            </div>
           </div>
-          <p className="mt-4 text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60">
-            LOADING EXPERIENCE {loadingProgress}%
-          </p>
+          <div className="mt-8 flex flex-col items-center gap-1">
+            <span className="text-[10px] font-bold text-primary tracking-[0.4em] uppercase">{loadingStatus}</span>
+            <span className="text-4xl font-black text-white font-code tracking-tighter">{loadingProgress}%</span>
+          </div>
         </div>
       )}
 
       <canvas 
         ref={canvasRef} 
-        className="fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none"
+        className="fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none opacity-80"
       />
 
-      <div className="relative z-10 flex flex-col items-start justify-center min-h-screen px-8 sm:px-16 lg:px-24 w-full h-full max-w-7xl mx-auto">
+      {/* Floating Socials */}
+      <div className="fixed bottom-10 left-8 z-50 flex flex-col gap-4 opacity-70 hover:opacity-100 transition-opacity">
+        <Link href={profileData.personalInfo.github} target="_blank" className="p-2 bg-white/5 hover:bg-primary/20 backdrop-blur-md border border-white/10 rounded-full transition-all hover:scale-110">
+          <Github className="w-4 h-4 text-white" />
+        </Link>
+        <Link href={profileData.personalInfo.linkedin} target="_blank" className="p-2 bg-white/5 hover:bg-primary/20 backdrop-blur-md border border-white/10 rounded-full transition-all hover:scale-110">
+          <Linkedin className="w-4 h-4 text-white" />
+        </Link>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-primary/50 to-transparent self-center" />
+      </div>
+
+      <div className="relative z-10 flex flex-col items-start justify-center min-h-screen px-10 sm:px-20 lg:px-32 w-full h-full max-w-7xl mx-auto pointer-events-none">
         
-        {/* Phase 1: Intro - Moved Left, Smaller */}
-        <div className="hero-text-1 flex flex-col items-start space-y-4 max-w-2xl">
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black font-headline tracking-tighter leading-[0.9] text-foreground mix-blend-difference uppercase">
+        {/* Phase 1: Intro - Moved further left/down, smaller */}
+        <div className="hero-text-1 flex flex-col items-start space-y-2 max-w-lg mt-20 pointer-events-auto">
+          <h1 className="text-4xl sm:text-6xl font-black font-headline tracking-tighter leading-[0.85] text-white mix-blend-difference uppercase">
             {profileData.personalInfo.name.split(' ')[0]} <br/>
             <span className="text-primary">{profileData.personalInfo.name.split(' ')[1]}</span>
           </h1>
-          <p className="text-base sm:text-xl font-bold text-foreground/80 mix-blend-difference uppercase tracking-[0.3em]">
+          <p className="text-[10px] sm:text-xs font-bold text-white/60 mix-blend-difference uppercase tracking-[0.5em]">
             {profileData.personalInfo.title}
           </p>
-          <div className="pt-12">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground animate-pulse">Scroll Down</span>
+          <div className="pt-20">
+            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 animate-bounce">Scroll to Explore</span>
           </div>
         </div>
 
-        {/* Phase 2: Statement - Moved Left, Smaller */}
-        <div className="hero-text-2 absolute flex flex-col items-start space-y-4 opacity-0 pointer-events-none max-w-xl">
-          <h2 className="text-3xl sm:text-5xl font-bold font-headline text-foreground mix-blend-difference leading-tight">
-             Redefining <br/><span className="text-primary italic">Digital Craftsmanship</span>
+        {/* Phase 2: Statement - Shifted further left */}
+        <div className="hero-text-2 absolute flex flex-col items-start space-y-3 opacity-0 pointer-events-none max-w-md left-10 sm:left-20 lg:left-32">
+          <h2 className="text-2xl sm:text-4xl font-bold font-headline text-white mix-blend-difference leading-tight">
+             REDEFINING <br/><span className="text-primary italic">CRAFTSMANSHIP</span>
           </h2>
-          <p className="text-sm sm:text-lg text-muted-foreground font-medium mix-blend-difference leading-relaxed">
+          <p className="text-xs sm:text-sm text-white/50 font-medium mix-blend-difference leading-relaxed">
             {profileData.summary}
           </p>
         </div>
 
-        {/* Phase 3: Connect - Moved Left, Smaller Buttons */}
-        <div className="hero-text-3 absolute flex flex-col items-start space-y-8 opacity-0 pointer-events-none max-w-2xl">
-          <h2 className="text-5xl sm:text-7xl font-black font-headline text-foreground mix-blend-difference tracking-tighter uppercase">
+        {/* Phase 3: Connect - Small sleek buttons, pushed down/left */}
+        <div className="hero-text-3 absolute flex flex-col items-start space-y-6 opacity-0 pointer-events-none max-w-lg mt-40 left-10 sm:left-20 lg:left-32">
+          <h2 className="text-4xl sm:text-6xl font-black font-headline text-white mix-blend-difference tracking-tighter uppercase">
             LET&apos;S <span className="text-primary">TALK</span>
           </h2>
-          <div className="flex flex-wrap gap-3">
-            <Button size="sm" asChild className="rounded-full px-8 h-11 text-sm font-bold shadow-lg bg-primary hover:bg-primary/90">
-              <Link href="#contact">Get in Touch</Link>
+          <div className="flex flex-wrap gap-2 pointer-events-auto">
+            <Button size="sm" asChild className="rounded-full px-6 h-9 text-[11px] font-bold shadow-lg bg-primary hover:bg-primary/90">
+              <Link href="#contact">Contact Now</Link>
             </Button>
-            <Button size="sm" variant="outline" asChild className="rounded-full px-8 h-11 text-sm font-bold backdrop-blur-md bg-white/5 border-primary/20 text-foreground hover:bg-primary/10">
-              <Link href="#projects">Browse Work</Link>
+            <Button size="sm" variant="outline" asChild className="rounded-full px-6 h-9 text-[11px] font-bold backdrop-blur-md bg-white/5 border-white/10 text-white hover:bg-white/10">
+              <Link href="#projects">My Work</Link>
             </Button>
           </div>
         </div>

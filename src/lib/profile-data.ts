@@ -1,4 +1,3 @@
-
 import type { ProfileData } from './types';
 
 export const profileData: ProfileData = {
@@ -33,7 +32,7 @@ export const profileData: ProfileData = {
       name: "Sparrowfy",
       description: "A comprehensive SaaS platform for coaching management, optimizing student tracking and scheduling.",
       technologies: [{ name: "React.js" }, { name: "API" }, { name: "SaaS" }],
-      imageUrl: "/images/Untitled design.png",
+      imageUrl: "/images/sparrowfy.png",
       imageHint: 'coaching management',
       projectUrl: "https://aiquizcraft.com",
       githubUrl: "#",
